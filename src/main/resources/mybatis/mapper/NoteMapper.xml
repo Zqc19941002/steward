@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.duanhong.steward.mapper.NoteMapper">
+  <resultMap id="BaseResultMap" type="top.duanhong.steward.entity.po.Note">
+    <id column="NOTE_ID" jdbcType="VARCHAR" property="noteId" />
+    <result column="NOTE_TITLE" jdbcType="VARCHAR" property="noteTitle" />
+    <result column="DESC_CONTENT" jdbcType="VARCHAR" property="descContent" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="NOTE_TYPE" jdbcType="VARCHAR" property="noteType" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    NOTE_ID, NOTE_TITLE, DESC_CONTENT, FILE_PATH, NOTE_TYPE, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" parameterType="top.duanhong.steward.entity.po.NoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STW_NOTES
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from STW_NOTES
+    where NOTE_ID = #{noteId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from STW_NOTES
+    where NOTE_ID = #{noteId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.duanhong.steward.entity.po.NoteExample">
+    delete from STW_NOTES
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.duanhong.steward.entity.po.Note">
+    insert into STW_NOTES (NOTE_ID, NOTE_TITLE, DESC_CONTENT, 
+      FILE_PATH, NOTE_TYPE, CREATE_TIME, 
+      UPDATE_TIME)
+    values (#{noteId,jdbcType=VARCHAR}, #{noteTitle,jdbcType=VARCHAR}, #{descContent,jdbcType=VARCHAR}, 
+      #{filePath,jdbcType=VARCHAR}, #{noteType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="top.duanhong.steward.entity.po.Note">
+    insert into STW_NOTES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noteId != null">
+        NOTE_ID,
+      </if>
+      <if test="noteTitle != null">
+        NOTE_TITLE,
+      </if>
+      <if test="descContent != null">
+        DESC_CONTENT,
+      </if>
+      <if test="filePath != null">
+        FILE_PATH,
+      </if>
+      <if test="noteType != null">
+        NOTE_TYPE,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noteId != null">
+        #{noteId,jdbcType=VARCHAR},
+      </if>
+      <if test="noteTitle != null">
+        #{noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="descContent != null">
+        #{descContent,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="noteType != null">
+        #{noteType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.duanhong.steward.entity.po.NoteExample" resultType="java.lang.Long">
+    select count(*) from STW_NOTES
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update STW_NOTES
+    <set>
+      <if test="record.noteId != null">
+        NOTE_ID = #{record.noteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noteTitle != null">
+        NOTE_TITLE = #{record.noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descContent != null">
+        DESC_CONTENT = #{record.descContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filePath != null">
+        FILE_PATH = #{record.filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noteType != null">
+        NOTE_TYPE = #{record.noteType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update STW_NOTES
+    set NOTE_ID = #{record.noteId,jdbcType=VARCHAR},
+      NOTE_TITLE = #{record.noteTitle,jdbcType=VARCHAR},
+      DESC_CONTENT = #{record.descContent,jdbcType=VARCHAR},
+      FILE_PATH = #{record.filePath,jdbcType=VARCHAR},
+      NOTE_TYPE = #{record.noteType,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.duanhong.steward.entity.po.Note">
+    update STW_NOTES
+    <set>
+      <if test="noteTitle != null">
+        NOTE_TITLE = #{noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="descContent != null">
+        DESC_CONTENT = #{descContent,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="noteType != null">
+        NOTE_TYPE = #{noteType,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where NOTE_ID = #{noteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.duanhong.steward.entity.po.Note">
+    update STW_NOTES
+    set NOTE_TITLE = #{noteTitle,jdbcType=VARCHAR},
+      DESC_CONTENT = #{descContent,jdbcType=VARCHAR},
+      FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      NOTE_TYPE = #{noteType,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where NOTE_ID = #{noteId,jdbcType=VARCHAR}
+  </update>
+</mapper>

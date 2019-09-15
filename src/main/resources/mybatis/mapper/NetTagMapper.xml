@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.duanhong.steward.mapper.NetTagMapper">
+  <resultMap id="BaseResultMap" type="top.duanhong.steward.entity.po.NetTag">
+    <id column="TAG_ID" jdbcType="VARCHAR" property="tagId" />
+    <result column="NET_TAG_TITLE" jdbcType="VARCHAR" property="netTagTitle" />
+    <result column="TAG_PATH" jdbcType="VARCHAR" property="tagPath" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="TAG_REMARK" jdbcType="VARCHAR" property="tagRemark" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="THEME" jdbcType="VARCHAR" property="theme" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TAG_ID, NET_TAG_TITLE, TAG_PATH, CREATE_TIME, UPDATE_TIME, TAG_REMARK, TYPE, THEME
+  </sql>
+  <select id="selectByExample" parameterType="top.duanhong.steward.entity.po.NetTagExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STW_NET_TAGS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from STW_NET_TAGS
+    where TAG_ID = #{tagId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from STW_NET_TAGS
+    where TAG_ID = #{tagId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.duanhong.steward.entity.po.NetTagExample">
+    delete from STW_NET_TAGS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.duanhong.steward.entity.po.NetTag">
+    insert into STW_NET_TAGS (TAG_ID, NET_TAG_TITLE, TAG_PATH, 
+      CREATE_TIME, UPDATE_TIME, TAG_REMARK, 
+      TYPE, THEME)
+    values (#{tagId,jdbcType=VARCHAR}, #{netTagTitle,jdbcType=VARCHAR}, #{tagPath,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{tagRemark,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{theme,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.duanhong.steward.entity.po.NetTag">
+    insert into STW_NET_TAGS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tagId != null">
+        TAG_ID,
+      </if>
+      <if test="netTagTitle != null">
+        NET_TAG_TITLE,
+      </if>
+      <if test="tagPath != null">
+        TAG_PATH,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="tagRemark != null">
+        TAG_REMARK,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="theme != null">
+        THEME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tagId != null">
+        #{tagId,jdbcType=VARCHAR},
+      </if>
+      <if test="netTagTitle != null">
+        #{netTagTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tagPath != null">
+        #{tagPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tagRemark != null">
+        #{tagRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="theme != null">
+        #{theme,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.duanhong.steward.entity.po.NetTagExample" resultType="java.lang.Long">
+    select count(*) from STW_NET_TAGS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update STW_NET_TAGS
+    <set>
+      <if test="record.tagId != null">
+        TAG_ID = #{record.tagId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netTagTitle != null">
+        NET_TAG_TITLE = #{record.netTagTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tagPath != null">
+        TAG_PATH = #{record.tagPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tagRemark != null">
+        TAG_REMARK = #{record.tagRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.theme != null">
+        THEME = #{record.theme,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update STW_NET_TAGS
+    set TAG_ID = #{record.tagId,jdbcType=VARCHAR},
+      NET_TAG_TITLE = #{record.netTagTitle,jdbcType=VARCHAR},
+      TAG_PATH = #{record.tagPath,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      TAG_REMARK = #{record.tagRemark,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      THEME = #{record.theme,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.duanhong.steward.entity.po.NetTag">
+    update STW_NET_TAGS
+    <set>
+      <if test="netTagTitle != null">
+        NET_TAG_TITLE = #{netTagTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tagPath != null">
+        TAG_PATH = #{tagPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tagRemark != null">
+        TAG_REMARK = #{tagRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="theme != null">
+        THEME = #{theme,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TAG_ID = #{tagId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.duanhong.steward.entity.po.NetTag">
+    update STW_NET_TAGS
+    set NET_TAG_TITLE = #{netTagTitle,jdbcType=VARCHAR},
+      TAG_PATH = #{tagPath,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      TAG_REMARK = #{tagRemark,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      THEME = #{theme,jdbcType=VARCHAR}
+    where TAG_ID = #{tagId,jdbcType=VARCHAR}
+  </update>
+</mapper>

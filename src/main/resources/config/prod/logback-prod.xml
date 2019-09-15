@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} |%-5level |%highlight(%logger{50}:%L) |%yellow([%thread])|%msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Simple file output -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- encoder defaults to ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} |%-5level |%highlight(%logger{50}:%L) |%yellow([%thread])|%msg%n
+            </pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--要拦截的日志级别-->
+            <level>ERROR</level>
+            <level>WARN</level>
+            <level>INFO</level>
+            <!--如果匹配，则禁止
+            <onMatch>DENY</onMatch>-->
+            <!--如果不匹配，则允许记录
+            <onMismatch>ACCEPT</onMismatch>-->
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>/data1/logs/factoringxh/factoringxh.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+
+        <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
+        <prudent>true</prudent>
+    </appender>
+
+    <logger name="com.xh" level="DEBUG" additivity="true">
+
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

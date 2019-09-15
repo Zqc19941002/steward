@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.duanhong.steward.mapper.StewFileMapper">
+  <resultMap id="BaseResultMap" type="top.duanhong.steward.entity.po.StewFile">
+    <id column="FILE_ID" jdbcType="VARCHAR" property="fileId" />
+    <result column="FILE_MONGO_ID" jdbcType="VARCHAR" property="fileMongoId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="FILE_NUM" jdbcType="INTEGER" property="fileNum" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="FILE_TYPE_ID" jdbcType="VARCHAR" property="fileTypeId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    FILE_ID, FILE_MONGO_ID, NAME, FILE_NUM, REMARK, PARENT_ID, CONTENT, TYPE, STATUS, 
+    FILE_TYPE_ID, CREATE_TIME, UPDATE_TIME, USER_ID
+  </sql>
+  <select id="selectByExample" parameterType="top.duanhong.steward.entity.po.StewFileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STW_FILE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from STW_FILE
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from STW_FILE
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.duanhong.steward.entity.po.StewFileExample">
+    delete from STW_FILE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.duanhong.steward.entity.po.StewFile">
+    insert into STW_FILE (FILE_ID, FILE_MONGO_ID, NAME, 
+      FILE_NUM, REMARK, PARENT_ID, 
+      CONTENT, TYPE, STATUS, 
+      FILE_TYPE_ID, CREATE_TIME, UPDATE_TIME, 
+      USER_ID)
+    values (#{fileId,jdbcType=VARCHAR}, #{fileMongoId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{fileNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{fileTypeId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{userId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.duanhong.steward.entity.po.StewFile">
+    insert into STW_FILE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        FILE_ID,
+      </if>
+      <if test="fileMongoId != null">
+        FILE_MONGO_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="fileNum != null">
+        FILE_NUM,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="fileTypeId != null">
+        FILE_TYPE_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileMongoId != null">
+        #{fileMongoId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null">
+        #{fileNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTypeId != null">
+        #{fileTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.duanhong.steward.entity.po.StewFileExample" resultType="java.lang.Long">
+    select count(*) from STW_FILE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update STW_FILE
+    <set>
+      <if test="record.fileId != null">
+        FILE_ID = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileMongoId != null">
+        FILE_MONGO_ID = #{record.fileMongoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileNum != null">
+        FILE_NUM = #{record.fileNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileTypeId != null">
+        FILE_TYPE_ID = #{record.fileTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update STW_FILE
+    set FILE_ID = #{record.fileId,jdbcType=VARCHAR},
+      FILE_MONGO_ID = #{record.fileMongoId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      FILE_NUM = #{record.fileNum,jdbcType=INTEGER},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      FILE_TYPE_ID = #{record.fileTypeId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      USER_ID = #{record.userId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.duanhong.steward.entity.po.StewFile">
+    update STW_FILE
+    <set>
+      <if test="fileMongoId != null">
+        FILE_MONGO_ID = #{fileMongoId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNum != null">
+        FILE_NUM = #{fileNum,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="fileTypeId != null">
+        FILE_TYPE_ID = #{fileTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.duanhong.steward.entity.po.StewFile">
+    update STW_FILE
+    set FILE_MONGO_ID = #{fileMongoId,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      FILE_NUM = #{fileNum,jdbcType=INTEGER},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      FILE_TYPE_ID = #{fileTypeId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      USER_ID = #{userId,jdbcType=VARCHAR}
+    where FILE_ID = #{fileId,jdbcType=VARCHAR}
+  </update>
+</mapper>
