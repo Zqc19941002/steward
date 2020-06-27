@@ -1,0 +1,4 @@
+#MySQL  spring.cloud.zookeeper.config.root根目录
+/top/duanhong/config/steward,dev=datasourceDriver=com.mysql.jdbc.Driver
+
+

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.duanhong.steward.mapper.gmapper.StewGridMapper">
+  <resultMap id="BaseResultMap" type="top.duanhong.steward.entity.po.StewGrid">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="grid_code" jdbcType="VARCHAR" property="gridCode" />
+    <result column="grid_name" jdbcType="VARCHAR" property="gridName" />
+    <result column="grid_sums" jdbcType="VARCHAR" property="gridSums" />
+    <result column="latitude_center" jdbcType="VARCHAR" property="latitudeCenter" />
+    <result column="left_down_lat" jdbcType="VARCHAR" property="leftDownLat" />
+    <result column="left_down_lon" jdbcType="VARCHAR" property="leftDownLon" />
+    <result column="left_up_lat" jdbcType="VARCHAR" property="leftUpLat" />
+    <result column="left_up_lon" jdbcType="VARCHAR" property="leftUpLon" />
+    <result column="longitude_center" jdbcType="VARCHAR" property="longitudeCenter" />
+    <result column="right_down_lat" jdbcType="VARCHAR" property="rightDownLat" />
+    <result column="right_down_lon" jdbcType="VARCHAR" property="rightDownLon" />
+    <result column="right_up_lat" jdbcType="VARCHAR" property="rightUpLat" />
+    <result column="right_up_lon" jdbcType="VARCHAR" property="rightUpLon" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, city_code, city_name, grid_code, grid_name, grid_sums, latitude_center, left_down_lat,
+    left_down_lon, left_up_lat, left_up_lon, longitude_center, right_down_lat, right_down_lon,
+    right_up_lat, right_up_lon
+  </sql>
+  <select id="selectByExample" parameterType="top.duanhong.steward.entity.po.StewGridExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stew_grid
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from stew_grid
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stew_grid
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.duanhong.steward.entity.po.StewGridExample">
+    delete from stew_grid
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.duanhong.steward.entity.po.StewGrid">
+    insert into stew_grid (id, city_code, city_name,
+      grid_code, grid_name, grid_sums,
+      latitude_center, left_down_lat, left_down_lon,
+      left_up_lat, left_up_lon, longitude_center,
+      right_down_lat, right_down_lon, right_up_lat,
+      right_up_lon)
+    values (#{id,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR},
+      #{gridCode,jdbcType=VARCHAR}, #{gridName,jdbcType=VARCHAR}, #{gridSums,jdbcType=VARCHAR},
+      #{latitudeCenter,jdbcType=VARCHAR}, #{leftDownLat,jdbcType=VARCHAR}, #{leftDownLon,jdbcType=VARCHAR},
+      #{leftUpLat,jdbcType=VARCHAR}, #{leftUpLon,jdbcType=VARCHAR}, #{longitudeCenter,jdbcType=VARCHAR},
+      #{rightDownLat,jdbcType=VARCHAR}, #{rightDownLon,jdbcType=VARCHAR}, #{rightUpLat,jdbcType=VARCHAR},
+      #{rightUpLon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.duanhong.steward.entity.po.StewGrid">
+    insert into stew_grid
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="cityName != null">
+        city_name,
+      </if>
+      <if test="gridCode != null">
+        grid_code,
+      </if>
+      <if test="gridName != null">
+        grid_name,
+      </if>
+      <if test="gridSums != null">
+        grid_sums,
+      </if>
+      <if test="latitudeCenter != null">
+        latitude_center,
+      </if>
+      <if test="leftDownLat != null">
+        left_down_lat,
+      </if>
+      <if test="leftDownLon != null">
+        left_down_lon,
+      </if>
+      <if test="leftUpLat != null">
+        left_up_lat,
+      </if>
+      <if test="leftUpLon != null">
+        left_up_lon,
+      </if>
+      <if test="longitudeCenter != null">
+        longitude_center,
+      </if>
+      <if test="rightDownLat != null">
+        right_down_lat,
+      </if>
+      <if test="rightDownLon != null">
+        right_down_lon,
+      </if>
+      <if test="rightUpLat != null">
+        right_up_lat,
+      </if>
+      <if test="rightUpLon != null">
+        right_up_lon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridCode != null">
+        #{gridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gridName != null">
+        #{gridName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridSums != null">
+        #{gridSums,jdbcType=VARCHAR},
+      </if>
+      <if test="latitudeCenter != null">
+        #{latitudeCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="leftDownLat != null">
+        #{leftDownLat,jdbcType=VARCHAR},
+      </if>
+      <if test="leftDownLon != null">
+        #{leftDownLon,jdbcType=VARCHAR},
+      </if>
+      <if test="leftUpLat != null">
+        #{leftUpLat,jdbcType=VARCHAR},
+      </if>
+      <if test="leftUpLon != null">
+        #{leftUpLon,jdbcType=VARCHAR},
+      </if>
+      <if test="longitudeCenter != null">
+        #{longitudeCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="rightDownLat != null">
+        #{rightDownLat,jdbcType=VARCHAR},
+      </if>
+      <if test="rightDownLon != null">
+        #{rightDownLon,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUpLat != null">
+        #{rightUpLat,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUpLon != null">
+        #{rightUpLon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.duanhong.steward.entity.po.StewGridExample" resultType="java.lang.Long">
+    select count(*) from stew_grid
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stew_grid
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityCode != null">
+        city_code = #{record.cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null">
+        city_name = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gridCode != null">
+        grid_code = #{record.gridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gridName != null">
+        grid_name = #{record.gridName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gridSums != null">
+        grid_sums = #{record.gridSums,jdbcType=VARCHAR},
+      </if>
+      <if test="record.latitudeCenter != null">
+        latitude_center = #{record.latitudeCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leftDownLat != null">
+        left_down_lat = #{record.leftDownLat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leftDownLon != null">
+        left_down_lon = #{record.leftDownLon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leftUpLat != null">
+        left_up_lat = #{record.leftUpLat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leftUpLon != null">
+        left_up_lon = #{record.leftUpLon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitudeCenter != null">
+        longitude_center = #{record.longitudeCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightDownLat != null">
+        right_down_lat = #{record.rightDownLat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightDownLon != null">
+        right_down_lon = #{record.rightDownLon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightUpLat != null">
+        right_up_lat = #{record.rightUpLat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightUpLon != null">
+        right_up_lon = #{record.rightUpLon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stew_grid
+    set id = #{record.id,jdbcType=VARCHAR},
+      city_code = #{record.cityCode,jdbcType=VARCHAR},
+      city_name = #{record.cityName,jdbcType=VARCHAR},
+      grid_code = #{record.gridCode,jdbcType=VARCHAR},
+      grid_name = #{record.gridName,jdbcType=VARCHAR},
+      grid_sums = #{record.gridSums,jdbcType=VARCHAR},
+      latitude_center = #{record.latitudeCenter,jdbcType=VARCHAR},
+      left_down_lat = #{record.leftDownLat,jdbcType=VARCHAR},
+      left_down_lon = #{record.leftDownLon,jdbcType=VARCHAR},
+      left_up_lat = #{record.leftUpLat,jdbcType=VARCHAR},
+      left_up_lon = #{record.leftUpLon,jdbcType=VARCHAR},
+      longitude_center = #{record.longitudeCenter,jdbcType=VARCHAR},
+      right_down_lat = #{record.rightDownLat,jdbcType=VARCHAR},
+      right_down_lon = #{record.rightDownLon,jdbcType=VARCHAR},
+      right_up_lat = #{record.rightUpLat,jdbcType=VARCHAR},
+      right_up_lon = #{record.rightUpLon,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.duanhong.steward.entity.po.StewGrid">
+    update stew_grid
+    <set>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        city_name = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridCode != null">
+        grid_code = #{gridCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gridName != null">
+        grid_name = #{gridName,jdbcType=VARCHAR},
+      </if>
+      <if test="gridSums != null">
+        grid_sums = #{gridSums,jdbcType=VARCHAR},
+      </if>
+      <if test="latitudeCenter != null">
+        latitude_center = #{latitudeCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="leftDownLat != null">
+        left_down_lat = #{leftDownLat,jdbcType=VARCHAR},
+      </if>
+      <if test="leftDownLon != null">
+        left_down_lon = #{leftDownLon,jdbcType=VARCHAR},
+      </if>
+      <if test="leftUpLat != null">
+        left_up_lat = #{leftUpLat,jdbcType=VARCHAR},
+      </if>
+      <if test="leftUpLon != null">
+        left_up_lon = #{leftUpLon,jdbcType=VARCHAR},
+      </if>
+      <if test="longitudeCenter != null">
+        longitude_center = #{longitudeCenter,jdbcType=VARCHAR},
+      </if>
+      <if test="rightDownLat != null">
+        right_down_lat = #{rightDownLat,jdbcType=VARCHAR},
+      </if>
+      <if test="rightDownLon != null">
+        right_down_lon = #{rightDownLon,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUpLat != null">
+        right_up_lat = #{rightUpLat,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUpLon != null">
+        right_up_lon = #{rightUpLon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.duanhong.steward.entity.po.StewGrid">
+    update stew_grid
+    set city_code = #{cityCode,jdbcType=VARCHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      grid_code = #{gridCode,jdbcType=VARCHAR},
+      grid_name = #{gridName,jdbcType=VARCHAR},
+      grid_sums = #{gridSums,jdbcType=VARCHAR},
+      latitude_center = #{latitudeCenter,jdbcType=VARCHAR},
+      left_down_lat = #{leftDownLat,jdbcType=VARCHAR},
+      left_down_lon = #{leftDownLon,jdbcType=VARCHAR},
+      left_up_lat = #{leftUpLat,jdbcType=VARCHAR},
+      left_up_lon = #{leftUpLon,jdbcType=VARCHAR},
+      longitude_center = #{longitudeCenter,jdbcType=VARCHAR},
+      right_down_lat = #{rightDownLat,jdbcType=VARCHAR},
+      right_down_lon = #{rightDownLon,jdbcType=VARCHAR},
+      right_up_lat = #{rightUpLat,jdbcType=VARCHAR},
+      right_up_lon = #{rightUpLon,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

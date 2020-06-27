@@ -1,0 +1,15 @@
+work_plan
+
+plan_id
+plan_create_user
+plan_title 工作计划标题
+plan_content 工作计划内容
+plan_remind_flag 提醒标志
+remind_type 提醒方式
+remind_time 提醒时间
+remind_message
+plan_degree 优先级
+plan_start_time 计划开始时间
+plan_end_time 计划结束时间
+
+
