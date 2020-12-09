@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import top.duanhong.steward.config.NetTagConfiguration;
 import top.duanhong.steward.entity.po.NetTag;
@@ -23,6 +24,9 @@ import java.util.List;
  */
 @Service
 public class NetTabService {
+    @Value("${netTagState}")
+    private String netTagState;
+
     @Autowired
     private NetTagMapper netTagMapper;
 
@@ -65,7 +69,7 @@ public class NetTabService {
         NetTagExample.Criteria criteria = example.createCriteria();
         NetTagConfiguration netTagConfiguration=new NetTagConfiguration();
         //设置状态
-        criteria.andStateEqualTo(netTagConfiguration.getNetTagState());
+        criteria.andStateEqualTo(netTagState);
         if (!StringUtils.isBlank(netTagSelectReq.getNetTagTitle())){
             criteria.andTagTitleLike("%" + netTagSelectReq.getNetTagTitle() + "%");
         }

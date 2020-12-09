@@ -13,9 +13,9 @@ import javax.validation.Valid;
  * @description
  * @date 2020/3/8
  */
-@ConfigurationProperties
+//@ConfigurationProperties
 @Configuration
-//@RefreshScope
+@RefreshScope
 @Data
 public class NetTagConfiguration {
     @Value("${netTagState}")
