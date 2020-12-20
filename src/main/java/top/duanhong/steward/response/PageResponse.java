@@ -1,4 +1,4 @@
-package top.duanhong.steward.response.response;
+package top.duanhong.steward.response;
 
 import java.util.List;
 

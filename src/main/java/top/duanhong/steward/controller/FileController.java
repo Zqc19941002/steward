@@ -7,7 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import top.duanhong.steward.enumeration.StatusCodeEnum;
 import top.duanhong.steward.request.*;
-import top.duanhong.steward.response.BaseResponse;
+import top.duanhong.steward.response.SysBaseResponse;
 import top.duanhong.steward.service.FileService;
 import top.duanhong.steward.service.FileTypeService;
 import top.duanhong.steward.service.RedisSequenceService;
@@ -36,7 +36,7 @@ public class FileController {
     private RedisSequenceService redisSequenceService;
 
     @GetMapping("/fileAllList")
-    public BaseResponse getAllFileList(String fileTypeId){
+    public SysBaseResponse getAllFileList(String fileTypeId){
         if (StringUtils.isBlank(fileTypeId)){
             return ResponseUtil.getFailedRes("23242","类型编码不能为空");
         }
@@ -53,13 +53,13 @@ public class FileController {
     }
 
     @PostMapping("/saveFile")
-    public BaseResponse saveFileOrFolder(@RequestBody @Valid FileAddReq fileAddReq, BindingResult bindingResult){
+    public SysBaseResponse saveFileOrFolder(@RequestBody @Valid FileAddReq fileAddReq, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return ResponseUtil.getFailedRes("00005","添加文件参数校验失败");
         }
         MethodExcuResult result=fileService.saveFileOrFolder(fileAddReq);
         if (result.isSuccess()){
-            return BaseResponse.builder()
+            return SysBaseResponse.builder()
                     .errorCode(StatusCodeEnum.SUCCESS_CODE.getCode())
                     .errorMessage(StatusCodeEnum.SUCCESS_CODE.getMessage())
                     .body(result.getResult())
@@ -70,7 +70,7 @@ public class FileController {
     }
 
     @PutMapping("/renameFile")
-    public BaseResponse renameFile(@RequestBody @Valid RenameFileReq renameFileReq,BindingResult bindingResult){
+    public SysBaseResponse renameFile(@RequestBody @Valid RenameFileReq renameFileReq, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return ResponseUtil.getFailedRes("098765434567890-","文件重命名参数校验失败");
         }
@@ -89,19 +89,19 @@ public class FileController {
      * @return
      */
     @PostMapping("/addFileType")
-    public BaseResponse addFileType(@RequestBody @Valid AddFileTypeReq req,BindingResult bindingResult){
-        BaseResponse baseResponse=BaseResponse.builder().errorCode(StatusCodeEnum.SUCCESS_CODE.getCode()).errorMessage(StatusCodeEnum.SUCCESS_CODE.getMessage()).build();
+    public SysBaseResponse addFileType(@RequestBody @Valid AddFileTypeReq req, BindingResult bindingResult){
+        SysBaseResponse sysBaseResponse = SysBaseResponse.builder().errorCode(StatusCodeEnum.SUCCESS_CODE.getCode()).errorMessage(StatusCodeEnum.SUCCESS_CODE.getMessage()).build();
         if (bindingResult.hasErrors()){
             return ResponseUtil.getFailedRes("0000098","参数校验失败");
         }
         MethodExcuResult result=fileTypeService.addFileType(req);
         if (result.isSuccess()){
-            baseResponse.setBody(result.getResult());
+            sysBaseResponse.setBody(result.getResult());
         }else {
-            baseResponse.setErrorCode("98765467890");
-            baseResponse.setErrorMessage(result.getMess());
+            sysBaseResponse.setErrorCode("98765467890");
+            sysBaseResponse.setErrorMessage(result.getMess());
         }
-        return baseResponse;
+        return sysBaseResponse;
     }
 
     /**
@@ -111,7 +111,7 @@ public class FileController {
      * @return
      */
     @DeleteMapping("/deleteFileType")
-    public BaseResponse deleteFileType(@RequestBody @Valid DeleteFileTypeReq req,BindingResult bindingResult){
+    public SysBaseResponse deleteFileType(@RequestBody @Valid DeleteFileTypeReq req, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return ResponseUtil.getFailedRes("098765","参数校验失败");
         }
@@ -130,7 +130,7 @@ public class FileController {
      * @return
      */
     @GetMapping("/fileTypeAllList")
-    public BaseResponse getFileTypes(String userId){
+    public SysBaseResponse getFileTypes(String userId){
         if (StringUtils.isBlank(userId)){
             //从sessionUser获取用户信息
             return ResponseUtil.getFailedRes("98765456789","参数校验失败");

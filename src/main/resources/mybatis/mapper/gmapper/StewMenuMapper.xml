@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.duanhong.steward.mapper.gmapper.StewMenuMapper">
   <resultMap id="BaseResultMap" type="top.duanhong.steward.entity.po.StewMenu">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="create_by" jdbcType="VARCHAR" property="createBy" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="menu_key" jdbcType="VARCHAR" property="menuKey" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="target" jdbcType="VARCHAR" property="target" />
     <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
@@ -72,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, create_by, create_date, key, icon, parent_id, remarks, target, menu_name, update_date
+    id, create_by, create_date, menu_key, icon, parent_id, remarks, target, menu_name, 
+    update_date
   </sql>
   <select id="selectByExample" parameterType="top.duanhong.steward.entity.po.StewMenuExample" resultMap="BaseResultMap">
     select
@@ -89,15 +90,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from stew_menus
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from stew_menus
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="top.duanhong.steward.entity.po.StewMenuExample">
     delete from stew_menus
@@ -107,11 +108,11 @@
   </delete>
   <insert id="insert" parameterType="top.duanhong.steward.entity.po.StewMenu">
     insert into stew_menus (id, create_by, create_date, 
-      key, icon, parent_id, 
+      menu_key, icon, parent_id, 
       remarks, target, menu_name, 
       update_date)
-    values (#{id,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{key,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{menuKey,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
       #{remarks,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, 
       #{updateDate,jdbcType=TIMESTAMP})
   </insert>
@@ -127,8 +128,8 @@
       <if test="createDate != null">
         create_date,
       </if>
-      <if test="key != null">
-        key,
+      <if test="menuKey != null">
+        menu_key,
       </if>
       <if test="icon != null">
         icon,
@@ -151,7 +152,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null">
         #{createBy,jdbcType=VARCHAR},
@@ -159,14 +160,14 @@
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="key != null">
-        #{key,jdbcType=VARCHAR},
+      <if test="menuKey != null">
+        #{menuKey,jdbcType=VARCHAR},
       </if>
       <if test="icon != null">
         #{icon,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
+        #{parentId,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
         #{remarks,jdbcType=VARCHAR},
@@ -192,7 +193,7 @@
     update stew_menus
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.createBy != null">
         create_by = #{record.createBy,jdbcType=VARCHAR},
@@ -200,14 +201,14 @@
       <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.key != null">
-        key = #{record.key,jdbcType=VARCHAR},
+      <if test="record.menuKey != null">
+        menu_key = #{record.menuKey,jdbcType=VARCHAR},
       </if>
       <if test="record.icon != null">
         icon = #{record.icon,jdbcType=VARCHAR},
       </if>
       <if test="record.parentId != null">
-        parent_id = #{record.parentId,jdbcType=INTEGER},
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
       </if>
       <if test="record.remarks != null">
         remarks = #{record.remarks,jdbcType=VARCHAR},
@@ -228,12 +229,12 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update stew_menus
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=VARCHAR},
       create_by = #{record.createBy,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      key = #{record.key,jdbcType=VARCHAR},
+      menu_key = #{record.menuKey,jdbcType=VARCHAR},
       icon = #{record.icon,jdbcType=VARCHAR},
-      parent_id = #{record.parentId,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=VARCHAR},
       remarks = #{record.remarks,jdbcType=VARCHAR},
       target = #{record.target,jdbcType=VARCHAR},
       menu_name = #{record.menuName,jdbcType=VARCHAR},
@@ -251,14 +252,14 @@
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
+      <if test="menuKey != null">
+        menu_key = #{menuKey,jdbcType=VARCHAR},
       </if>
       <if test="icon != null">
         icon = #{icon,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=INTEGER},
+        parent_id = #{parentId,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
@@ -273,19 +274,19 @@
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="top.duanhong.steward.entity.po.StewMenu">
     update stew_menus
     set create_by = #{createBy,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      key = #{key,jdbcType=VARCHAR},
+      menu_key = #{menuKey,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR},
       target = #{target,jdbcType=VARCHAR},
       menu_name = #{menuName,jdbcType=VARCHAR},
       update_date = #{updateDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

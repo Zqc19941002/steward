@@ -1,4 +1,4 @@
-package top.duanhong.steward.response.response;
+package top.duanhong.steward.response;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;

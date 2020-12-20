@@ -5,12 +5,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import top.duanhong.steward.enumeration.StatusCodeEnum;
 import top.duanhong.steward.request.*;
-import top.duanhong.steward.response.BaseResponse;
+import top.duanhong.steward.response.SysBaseResponse;
 import top.duanhong.steward.service.NetTabService;
 import top.duanhong.steward.utils.FileUtil;
 import top.duanhong.steward.utils.MethodExcuResult;
@@ -33,7 +32,7 @@ public class NetTagController {
     private NetTabService netTabService;
 
     @GetMapping("/queryNetTagPage")
-    public BaseResponse getNetTag(String title,String remark,String tagPath,String page,String pageSize){
+    public SysBaseResponse getNetTag(String title, String remark, String tagPath, String page, String pageSize){
         if (StringUtils.isBlank(page)||StringUtils.isBlank(pageSize)){
             log.error("页码参数不能为空");
             return ResponseUtil.getFailedRes("0002","页码参数不能为空");
@@ -45,7 +44,7 @@ public class NetTagController {
         req.setPage(Integer.valueOf(page));
         req.setPageSize(Integer.valueOf(pageSize));
         MethodExcuResult result=netTabService.netTagSelectByExample(req);
-        return BaseResponse.builder()
+        return SysBaseResponse.builder()
                 .body(result)
                 .errorCode(StatusCodeEnum.SUCCESS_CODE.getCode())
                 .errorMessage(StatusCodeEnum.SUCCESS_CODE.getMessage())
@@ -53,7 +52,7 @@ public class NetTagController {
     }
 
     @PostMapping("/addNetTag")
-    public BaseResponse addNetTag(@RequestBody @Valid NetTagAddReq netTagAddReq, BindingResult bindingResult){
+    public SysBaseResponse addNetTag(@RequestBody @Valid NetTagAddReq netTagAddReq, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             log.error("添加网络标签时，参数检验失败");
             return ResponseUtil.getFailedRes("0001","参数校验是失败");
@@ -67,7 +66,7 @@ public class NetTagController {
     }
 
     @DeleteMapping("/deleteNetTag")
-    public BaseResponse deleteNetTag(@RequestBody @Valid NetTagDeleteReq deleteReq,BindingResult bindingResult){
+    public SysBaseResponse deleteNetTag(@RequestBody @Valid NetTagDeleteReq deleteReq, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("删除网络标签时错误，可能是为传入Id");
             return ResponseUtil.getFailedRes("0001","参数校验失败");
@@ -81,7 +80,7 @@ public class NetTagController {
     }
 
     @DeleteMapping("/deleteNetTags")
-    public BaseResponse NetTagDeleteBatchesReq(@RequestBody @Valid NetTagDeleteBatchesReq req,BindingResult bindingResult){
+    public SysBaseResponse NetTagDeleteBatchesReq(@RequestBody @Valid NetTagDeleteBatchesReq req, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("批量删除网络标签时错误，可能是为传入Id");
             return ResponseUtil.getFailedRes("0001","参数校验失败");
@@ -95,7 +94,7 @@ public class NetTagController {
     }
 
     @PutMapping("/updateNetTag")
-    public BaseResponse updateNetTag(@RequestBody @Valid NetTagUpdateReq req,BindingResult bindingResult){
+    public SysBaseResponse updateNetTag(@RequestBody @Valid NetTagUpdateReq req, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             log.error("更新网络标签时错误");
             return ResponseUtil.getFailedRes("0001","参数校验失败");

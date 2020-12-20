@@ -5,7 +5,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import top.duanhong.steward.enumeration.StatusCodeEnum;
 import top.duanhong.steward.request.AddGridReq;
-import top.duanhong.steward.response.BaseResponse;
+import top.duanhong.steward.response.SysBaseResponse;
 import top.duanhong.steward.service.GridService;
 import top.duanhong.steward.utils.MethodExcuResult;
 import top.duanhong.steward.utils.ResponseUtil;
@@ -26,7 +26,7 @@ public class GridController {
     private GridService gridService;
 
     @GetMapping("/list")
-    public BaseResponse getGridList(){
+    public SysBaseResponse getGridList(){
         List result=gridService.getGridList();
         if (result==null){
             return ResponseUtil.getFailedRes("31651","查询失败");
@@ -36,13 +36,13 @@ public class GridController {
     }
 
     @PostMapping("/save")
-    public BaseResponse saveGrid(@RequestBody @Valid AddGridReq addGridReq, BindingResult bindingResult){
+    public SysBaseResponse saveGrid(@RequestBody @Valid AddGridReq addGridReq, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             return ResponseUtil.getFailedRes("21665","参数错误");
         }
         MethodExcuResult result =gridService.saveGrid(addGridReq);
         if (result.isSuccess()){
-            return BaseResponse.builder()
+            return SysBaseResponse.builder()
                     .errorCode(StatusCodeEnum.SUCCESS_CODE.getCode())
                     .errorMessage(result.getMess())
                     .body(result.getResult())

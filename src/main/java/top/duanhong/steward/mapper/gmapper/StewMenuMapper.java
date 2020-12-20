@@ -11,7 +11,7 @@ public interface StewMenuMapper {
 
     int deleteByExample(StewMenuExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(StewMenu record);
 
@@ -19,7 +19,7 @@ public interface StewMenuMapper {
 
     List<StewMenu> selectByExample(StewMenuExample example);
 
-    StewMenu selectByPrimaryKey(Integer id);
+    StewMenu selectByPrimaryKey(String id);
 
     int updateByExampleSelective(@Param("record") StewMenu record, @Param("example") StewMenuExample example);
 

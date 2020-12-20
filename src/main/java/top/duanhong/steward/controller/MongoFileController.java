@@ -1,11 +1,10 @@
 package top.duanhong.steward.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import top.duanhong.steward.entity.bo.FileDocument;
 import top.duanhong.steward.enumeration.StatusCodeEnum;
-import top.duanhong.steward.response.BaseResponse;
+import top.duanhong.steward.response.SysBaseResponse;
 import top.duanhong.steward.service.MongoFileService;
 import top.duanhong.steward.utils.ResponseUtil;
 
@@ -35,7 +34,7 @@ public class MongoFileController {
         return fileService.listFilesByPage(pageIndex,pageSize);
     }
 
-    
+
 
     /**
      * 在线显示文件
@@ -43,10 +42,10 @@ public class MongoFileController {
      * @return
      */
     @GetMapping("/queryFileById")
-    public BaseResponse serveFileOnline(@PathVariable String id) {
+    public SysBaseResponse serveFileOnline(@PathVariable String id) {
         Optional<FileDocument> file = fileService.getById(id);
         if (file.isPresent()) {
-            return BaseResponse.builder()
+            return SysBaseResponse.builder()
                     .errorCode(StatusCodeEnum.SUCCESS_CODE.getCode())
                     .errorMessage(StatusCodeEnum.SUCCESS_CODE.getCode())
                     .body(file.get().getContent())

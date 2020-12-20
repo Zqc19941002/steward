@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
-public class StewMenuVo {
+public class MenuNode {
     private String id;
 
     private String createBy;
@@ -29,4 +30,5 @@ public class StewMenuVo {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateDate;
 
+    private List<MenuNode> children;
 }

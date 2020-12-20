@@ -6,7 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import top.duanhong.steward.request.DictAddReq;
 import top.duanhong.steward.request.QueryDictReq;
-import top.duanhong.steward.response.BaseResponse;
+import top.duanhong.steward.response.SysBaseResponse;
 import top.duanhong.steward.service.DictService;
 import top.duanhong.steward.utils.MethodExcuResult;
 import top.duanhong.steward.utils.ResponseUtil;
@@ -27,7 +27,7 @@ public class DictController {
     private DictService dictService;
 
     @GetMapping("/query")
-    public BaseResponse queryDict(){
+    public SysBaseResponse queryDict(){
         QueryDictReq req=new QueryDictReq();
         MethodExcuResult result=dictService.queryDict(req);
         if (result.isSuccess()){
@@ -38,7 +38,7 @@ public class DictController {
     }
 
     @PostMapping("/insert")
-    public BaseResponse insertDict(@RequestBody @Valid DictAddReq req, BindingResult bindingResult){
+    public SysBaseResponse insertDict(@RequestBody @Valid DictAddReq req, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
             log.error("字典新增异常");
             return ResponseUtil.getFailedRes("0005","字典新增异常");

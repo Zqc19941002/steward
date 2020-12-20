@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.duanhong.steward.request.QueryMgmtRivalReq;
-import top.duanhong.steward.response.BaseResponse;
+import top.duanhong.steward.response.SysBaseResponse;
 import top.duanhong.steward.service.MgmtRivalService;
 import top.duanhong.steward.utils.MethodExcuResult;
 import top.duanhong.steward.utils.ResponseUtil;
@@ -25,27 +25,27 @@ public class MgmtRivalController {
     private MgmtRivalService mgmtRivalServicel;
 
     @GetMapping("/queryRivalList")
-    public BaseResponse queryRivalList(QueryMgmtRivalReq req){
+    public SysBaseResponse queryRivalList(QueryMgmtRivalReq req){
         MethodExcuResult result=mgmtRivalServicel.queryRivalList(req);
-        BaseResponse baseResponse;
+        SysBaseResponse sysBaseResponse;
         if (result.isSuccess()){
-            baseResponse=ResponseUtil.getSuccessRes(result.getResult());
+            sysBaseResponse =ResponseUtil.getSuccessRes(result.getResult());
         }else {
-            baseResponse=ResponseUtil.getFailedRes(result.getCode(),result.getMess());
+            sysBaseResponse =ResponseUtil.getFailedRes(result.getCode(),result.getMess());
         }
-        return baseResponse;
+        return sysBaseResponse;
     }
 
     @GetMapping("/queryRivalLonLatList")
-    public BaseResponse queryRivalLonLatList(QueryMgmtRivalReq req){
+    public SysBaseResponse queryRivalLonLatList(QueryMgmtRivalReq req){
         MethodExcuResult result=mgmtRivalServicel.queryRivalListBySmapper(req);
-        BaseResponse baseResponse;
+        SysBaseResponse sysBaseResponse;
         if (result.isSuccess()){
-            baseResponse=ResponseUtil.getSuccessRes(result.getResult());
+            sysBaseResponse =ResponseUtil.getSuccessRes(result.getResult());
         }else {
-            baseResponse=ResponseUtil.getFailedRes(result.getCode(),result.getMess());
+            sysBaseResponse =ResponseUtil.getFailedRes(result.getCode(),result.getMess());
         }
-        return baseResponse;
+        return sysBaseResponse;
     }
 
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum StatusCodeEnum {
 
 	SUCCESS_CODE("0000","成功"),
+	ERROR_CODE("9999","操作失败"),
 	ERROR_SECR("0001","密码错误"),
 	NO_USER("0002","用户未注册"),
 	REQ_PARAM_ERROR("0003","数据校验失败"),
@@ -13,7 +14,8 @@ public enum StatusCodeEnum {
 	REG_FAIL("0005","注册失败"),
 	REG_SUCCESS("0006","注册成功"),
 	NO_AUTH("0007","登录超时"),
-	FLOW_DELETE_FAIL("0008","流水删除失败");
+	FLOW_DELETE_FAIL("0008","流水删除失败"),
+	NO_MENU("0009","菜单数据为空");
 
 	private final String code;
 	private final String message;
