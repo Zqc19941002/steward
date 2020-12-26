@@ -28,7 +28,7 @@
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>/data1/logs/factoringxh/factoringxh.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>./logs/steward/steward.log.%d{yyyy-MM-dd}</fileNamePattern>
         </rollingPolicy>
 
         <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
