@@ -1,0 +1,1905 @@
+desc activity_signal;
+er_tag;
+desc company_tag;
+desc company_template;
+desc config_code_name;
+desc config_college;
+desc config_ding_param;
+desc config_industry;
+desc config_info_ext;
+desc config_ip;
+desc config_major;
+desc config_region;
+desc config_sale;
+desc config_sys_parame+-----------------+--------------+------+-----+---------------------+-------+
+| Field           | Type         | Null | Key | Default             | Extra |
++-----------------+--------------+------+-----+---------------------+-------+
+| id              | int(11)      | NO   | PRI | NULL                |       |
+| address_id      | int(11)      | NO   | MUL | NULL                |       |
+| phone_nbr       | varchar(30)  | YES  | MUL | NULL                |       |
+| phone_type      | varchar(100) | YES  |     | NULL                |       |
+| carrier         | varchar(10)  | YES  |     | NULL                |       |
+| net_type        | varchar(10)  | YES  |     | NULL                |       |
+| signal_strength | int(11)      | NO   |     | NULL                |       |
+| down_band       | int(11)      | NO   |     | NULL                |       |
+| up_band         | int(11)      | NO   |     | NULL                |       |
+| begin_date      | timestamp    | NO   |     | CURRENT_TIMESTAMP   |       |
+| end_date        | timestamp    | NO   |     | 2020-12-24 09:37:00 |       |
+| longitude       | decimal(8,5) | YES  |     | NULL                |       |
+| latitude        | decimal(8,5) | YES  |     | NULL                |       |
+| accuracy        | int(8)       | YES  |     | NULL                |       |
+| pic1            | varchar(128) | YES  |     | NULL                |       |
+| pic2            | varchar(128) | YES  |     | NULL                |       |
+| pic3            | varchar(128) | YES  |     | NULL                |       |
++-----------------+--------------+------+-----+---------------------+-------+
+17 rows in set (0.00 sec)
+
+mysql> desc candidate;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| candidate_id   | int(11)     | NO   | PRI | NULL    |       |
+| origin_id      | int(11)     | NO   |     | NULL    |       |
+| candidate_name | varchar(30) | NO   |     | NULL    |       |
+| candidate_uid  | varchar(64) | NO   | MUL | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc candidate_info_ext;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| candidate_id | int(11)      | NO   | PRI | NULL    |       |
+| info_id      | int(11)      | NO   | PRI | NULL    |       |
+| value        | varchar(255) | NO   |     | NULL    |       |
+| real_value   | varchar(255) | NO   |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc candidate_origin;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| origin_id   | int(11)     | NO   | PRI | NULL    |       |
+| origin_name | varchar(32) | NO   |     | NULL    |       |
+| employer_id | int(11)     | NO   | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc clazz;
++------------------+---------------+------+-----+-------------------+-------+
+| Field            | Type          | Null | Key | Default           | Extra |
++------------------+---------------+------+-----+-------------------+-------+
+| clazz_id         | int(11)       | NO   | PRI | NULL              |       |
+| clazz_name       | varchar(255)  | NO   |     | NULL              |       |
+| clazz_desc       | varchar(1024) | YES  |     | NULL              |       |
+| clazz_logo       | varchar(255)  | YES  |     | NULL              |       |
+| owner_id         | int(11)       | NO   |     | NULL              |       |
+| perm             | int(11)       | NO   |     | NULL              |       |
+| state            | int(1)        | NO   |     | NULL              |       |
+| students         | int(11)       | NO   |     | NULL              |       |
+| teachers         | int(11)       | YES  |     | NULL              |       |
+| student_pendings | int(11)       | NO   |     | 0                 |       |
+| teacher_pendings | int(11)       | NO   |     | 0                 |       |
+| created_by       | int(11)       | YES  |     | NULL              |       |
+| create_date      | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update      | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| max_user         | int(11)       | YES  |     | 0                 |       |
+| eff_date         | timestamp     | YES  |     | NULL              |       |
+| exp_date         | timestamp     | YES  |     | NULL              |       |
+| clazz_features   | int(11)       | YES  |     | 0                 |       |
+| sale_id          | int(11)       | YES  |     | 0                 |       |
+| duration         | int(11)       | YES  |     | 0                 |       |
++------------------+---------------+------+-----+-------------------+-------+
+20 rows in set (0.00 sec)
+
+mysql> desc clazz_notice;
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| Field       | Type          | Null | Key | Default           | Extra                       |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| notice_id   | int(11)       | NO   | PRI | NULL              |                             |
+| clazz_id    | int(11)       | NO   | MUL | NULL              |                             |
+| user_id     | int(11)       | NO   |     | NULL              |                             |
+| content     | varchar(2000) | NO   |     | NULL              |                             |
+| topme       | int(1)        | NO   |     | 0                 |                             |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP |                             |
+| last_update | timestamp     | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+7 rows in set (0.00 sec)
+
+mysql> desc clazz_paper;
++-----------------+---------------+------+-----+-------------------+-------+
+| Field           | Type          | Null | Key | Default           | Extra |
++-----------------+---------------+------+-----+-------------------+-------+
+| clazz_id        | int(11)       | NO   | PRI | NULL              |       |
+| paper_id        | int(11)       | NO   | PRI | NULL              |       |
+| description     | varchar(2000) | YES  |     | NULL              |       |
+| state           | int(1)        | NO   |     | 0                 |       |
+| user_id         | int(11)       | YES  |     | NULL              |       |
+| begin_date      | timestamp     | YES  |     | NULL              |       |
+| end_date        | timestamp     | YES  |     | NULL              |       |
+| create_date     | timestamp     | YES  |     | CURRENT_TIMESTAMP |       |
+| last_update     | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| invitation_date | timestamp     | YES  |     | NULL              |       |
+| invitations     | int(11)       | NO   |     | 0                 |       |
+| on_goings       | int(11)       | NO   |     | 0                 |       |
+| unread_report   | int(11)       | NO   |     | 0                 |       |
+| user_noticed    | int(1)        | YES  |     | 0                 |       |
++-----------------+---------------+------+-----+-------------------+-------+
+14 rows in set (0.00 sec)
+
+mysql> desc clazz_paper_invitation;
++------------------+------------+------+-----+---------------------+-----------------------------+
+| Field            | Type       | Null | Key | Default             | Extra                       |
++------------------+------------+------+-----+---------------------+-----------------------------+
+| invitation_id    | int(11)    | NO   | PRI | NULL                | auto_increment              |
+| clazz_id         | int(11)    | NO   | MUL | NULL                |                             |
+| paper_id         | int(11)    | NO   |     | NULL                |                             |
+| user_id          | int(11)    | NO   |     | NULL                |                             |
+| sent_type        | int(2)     | NO   |     | 0                   |                             |
+| test_state       | int(2)     | NO   |     | 0                   |                             |
+| resent_times     | int(11)    | NO   |     | 0                   |                             |
+| invitation_state | int(11)    | NO   |     | 0                   |                             |
+| email_id         | bigint(20) | YES  |     | NULL                |                             |
+| email_code       | int(11)    | YES  |     | NULL                |                             |
+| sms_id           | bigint(20) | YES  |     | NULL                |                             |
+| sms_code         | int(11)    | YES  |     | NULL                |                             |
+| create_date      | timestamp  | NO   |     | CURRENT_TIMESTAMP   | on update CURRENT_TIMESTAMP |
+| last_update      | timestamp  | NO   |     | 2020-12-24 09:37:00 |                             |
++------------------+------------+------+-----+---------------------+-----------------------------+
+14 rows in set (0.00 sec)
+
+mysql> desc clazz_user;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| clazz_id    | int(11)      | NO   | PRI | NULL              |       |
+| user_id     | int(11)      | NO   | PRI | NULL              |       |
+| user_alias  | varchar(128) | YES  |     | NULL              |       |
+| user_type   | int(1)       | NO   |     | NULL              |       |
+| user_perm   | int(11)      | NO   |     | 0                 |       |
+| state       | int(1)       | NO   |     | NULL              |       |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+--------------+------+-----+-------------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc company;
++---------------+---------------+------+-----+-------------------+-------+
+| Field         | Type          | Null | Key | Default           | Extra |
++---------------+---------------+------+-----+-------------------+-------+
+| company_id    | int(11)       | NO   | PRI | NULL              |       |
+| company_name  | varchar(64)   | NO   | UNI | NULL              |       |
+| company_logo  | varchar(1024) | YES  |     | NULL              |       |
+| company_state | int(11)       | NO   |     | NULL              |       |
+| industry_id   | varchar(4)    | YES  |     | NULL              |       |
+| register_date | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| belong_id     | int(11)       | NO   |     | 0                 |       |
+| manager_id    | int(11)       | YES  |     | NULL              |       |
+| domain_name   | varchar(128)  | YES  | UNI | NULL              |       |
+| perm          | int(11)       | NO   |     | 15                |       |
+| content       | varchar(1024) | YES  |     | NULL              |       |
+| secret        | varchar(32)   | YES  |     | NULL              |       |
+| auth_url      | varchar(256)  | YES  |     | NULL              |       |
+| server        | varchar(64)   | YES  |     | NULL              |       |
++---------------+---------------+------+-----+-------------------+-------+
+14 rows in set (0.00 sec)
+
+mysql> desc company_dept;
++-------------+---------------+------+-----+-------------------+-------+
+| Field       | Type          | Null | Key | Default           | Extra |
++-------------+---------------+------+-----+-------------------+-------+
+| dept_id     | int(11)       | NO   | PRI | NULL              |       |
+| dept_name   | varchar(128)  | NO   | MUL | NULL              |       |
+| parent_id   | int(11)       | NO   |     | NULL              |       |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| last_date   | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| seq         | int(11)       | NO   |     | NULL              |       |
+| company_id  | int(11)       | NO   | MUL | 0                 |       |
+| dept_alias  | varchar(64)   | YES  |     | NULL              |       |
+| dept_logo   | varchar(1024) | YES  |     | NULL              |       |
+| content     | varchar(1024) | YES  |     | NULL              |       |
++-------------+---------------+------+-----+-------------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc company_employer;
++--------------------+-----------+------+-----+-------------------+-------+
+| Field              | Type      | Null | Key | Default           | Extra |
++--------------------+-----------+------+-----+-------------------+-------+
+| employer_id        | int(11)   | NO   | PRI | NULL              |       |
+| company_id         | int(11)   | NO   |     | NULL              |       |
+| employer_state     | int(11)   | NO   |     | NULL              |       |
+| invite_employer_id | int(11)   | YES  |     | NULL              |       |
+| create_date        | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update        | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
+| dept_id            | int(11)   | YES  |     | -1                |       |
+| active_state       | int(11)   | NO   |     | 1                 |       |
++--------------------+-----------+------+-----+-------------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc company_employer_tag;
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| Field       | Type      | Null | Key | Default           | Extra                       |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| id          | int(11)   | NO   | PRI | NULL              |                             |
+| belong_id   | int(11)   | NO   | MUL | 0                 |                             |
+| employer_id | int(11)   | YES  |     | NULL              |                             |
+| contact_id  | int(11)   | NO   |     | NULL              |                             |
+| tag_id      | int(11)   | NO   |     | NULL              |                             |
+| create_date | timestamp | YES  |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> desc company_tag;
++-------------+--------------+------+-----+-------------------+-----------------------------+
+| Field       | Type         | Null | Key | Default           | Extra                       |
++-------------+--------------+------+-----+-------------------+-----------------------------+
+| tag_id      | int(11)      | NO   | PRI | NULL              |                             |
+| belong_id   | int(11)      | NO   |     | 0                 |                             |
+| tag_name    | varchar(30)  | NO   |     | NULL              |                             |
+| type        | int(2)       | NO   |     | NULL              |                             |
+| extension   | varchar(255) | YES  |     | NULL              |                             |
+| employer_id | int(11)      | NO   | MUL | NULL              |                             |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |                             |
+| last_update | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+--------------+------+-----+-------------------+-----------------------------+
+8 rows in set (0.00 sec)
+
+mysql> desc company_template;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employer_id | int(11)     | NO   | PRI | NULL    |       |
+| template_id | varchar(60) | NO   | PRI | NULL    |       |
+| content     | mediumtext  | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc config_code_name;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| code_type | varchar(60)  | NO   | PRI | NULL    |       |
+| code_id   | varchar(60)  | NO   | PRI | NULL    |       |
+| code_name | varchar(255) | NO   |     | NULL    |       |
+| seq       | int(11)      | NO   |     | NULL    |       |
+| code_desc | varchar(255) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> desc config_college;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| college_id    | int(11)     | NO   | PRI | NULL    |       |
+| college_name  | varchar(60) | NO   |     | NULL    |       |
+| abbreviation  | varchar(30) | NO   |     | NULL    |       |
+| college_level | int(1)      | NO   |     | NULL    |       |
+| catalog       | varchar(5)  | YES  |     | NULL    |       |
+| city_id       | int(11)     | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc config_ding_param;
++-------------+---------------+------+-----+---------------------+-----------------------------+
+| Field       | Type          | Null | Key | Default             | Extra                       |
++-------------+---------------+------+-----+---------------------+-----------------------------+
+| param_type  | varchar(32)   | NO   | PRI | NULL                |                             |
+| param_key   | varchar(156)  | NO   | PRI | NULL                |                             |
+| param_value | varchar(4000) | NO   |     | NULL                |                             |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP   | on update CURRENT_TIMESTAMP |
+| last_update | timestamp     | NO   |     | 2020-12-24 09:37:00 |                             |
++-------------+---------------+------+-----+---------------------+-----------------------------+
+5 rows in set (0.00 sec)
+
+mysql> desc config_industry;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| industry_id   | varchar(4)  | NO   | PRI | NULL    |       |
+| industry_name | varchar(60) | NO   |     | NULL    |       |
+| parent_id     | varchar(4)  | NO   | MUL | NULL    |       |
+| level         | int(11)     | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc config_info_ext;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| info_id       | int(11)      | NO   | PRI | NULL    |       |
+| info_name     | varchar(64)  | NO   |     | NULL    |       |
+| seq           | int(3)       | NO   |     | NULL    |       |
+| data_type     | int(2)       | NO   |     | NULL    |       |
+| value_type    | int(2)       | NO   |     | NULL    |       |
+| value_content | mediumtext   | YES  |     | NULL    |       |
+| length_limit  | int(11)      | NO   |     | NULL    |       |
+| regex         | varchar(256) | YES  |     | NULL    |       |
+| selected      | int(1)       | NO   | MUL | NULL    |       |
+| mandatory     | int(1)       | NO   |     | NULL    |       |
+| search_type   | int(1)       | NO   |     | NULL    |       |
+| visible       | int(1)       | NO   |     | 1       |       |
++---------------+--------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> desc config_ip;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| ip            | varchar(11) | NO   | PRI | NULL    |       |
+| province      | varchar(32) | NO   |     | NULL    |       |
+| city          | varchar(32) | NO   |     | NULL    |       |
+| city_code     | varchar(10) | NO   |     | NULL    |       |
+| district      | varchar(32) | YES  |     | NULL    |       |
+| street        | varchar(32) | YES  |     | NULL    |       |
+| street_number | varchar(32) | YES  |     | NULL    |       |
+| longitude     | double      | NO   |     | NULL    |       |
+| latitude      | double      | NO   |     | NULL    |       |
+| net_name      | varchar(32) | NO   |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc config_major;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| major_id   | varchar(4)  | NO   | PRI | NULL    |       |
+| major_name | varchar(60) | NO   |     | NULL    |       |
+| parent_id  | varchar(4)  | NO   | MUL | NULL    |       |
+| level      | int(11)     | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc config_region;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| region_id    | int(11)     | NO   | PRI | NULL    |       |
+| parent_id    | int(11)     | NO   | MUL | NULL    |       |
+| region_name  | varchar(60) | NO   | MUL | NULL    |       |
+| region_level | int(11)     | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc config_sale;
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| Field       | Type          | Null | Key | Default           | Extra                       |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| sale_id     | int(11)       | NO   | PRI | NULL              |                             |
+| sale_name   | varchar(128)  | NO   |     | NULL              |                             |
+| sale_desc   | varchar(1024) | YES  |     | NULL              |                             |
+| res_type    | int(11)       | NO   |     | NULL              |                             |
+| price       | int(11)       | NO   |     | NULL              |                             |
+| sale_num    | int(11)       | NO   |     | NULL              |                             |
+| gift_num    | int(11)       | NO   |     | NULL              |                             |
+| state       | int(11)       | NO   |     | NULL              |                             |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP |                             |
+| last_update | timestamp     | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| bundle_id   | int(11)       | YES  |     | 0                 |                             |
+| duration    | int(11)       | YES  |     | 0                 |                             |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc config_sys_parameter;
+esc employer_favorite;
+desc employer_finish;
+desc employer_info_ext;
+desc employer_invite;
+desc employer_keyword;
+desc employer_origin;
+desc employer_resource;
+desc employer_sign;
+desc employer_stat;
+desc employer_tag;
+desc exchange_link;
+desc identity_cod+-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| param_id    | varchar(64)  | NO   | PRI | NULL    |       |
+| param_name  | varchar(64)  | NO   | PRI | NULL    |       |
+| param_value | mediumtext   | NO   |     | NULL    |       |
+| param_desc  | varchar(255) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc contact_info;
++--------------+---------------+------+-----+-------------------+-------+
+| Field        | Type          | Null | Key | Default           | Extra |
++--------------+---------------+------+-----+-------------------+-------+
+| id           | int(11)       | NO   | PRI | NULL              |       |
+| name         | varchar(64)   | YES  |     | NULL              |       |
+| company      | varchar(64)   | YES  |     | NULL              |       |
+| email        | varchar(100)  | YES  |     | NULL              |       |
+| phone        | varchar(20)   | YES  |     | NULL              |       |
+| remark       | varchar(1000) | YES  |     | NULL              |       |
+| contact_date | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
++--------------+---------------+------+-----+-------------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc conv_url;
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| Field       | Type          | Null | Key | Default           | Extra                       |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| id          | int(11)       | NO   | PRI | NULL              |                             |
+| origin_url  | varchar(1024) | NO   |     | NULL              |                             |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc course;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| course_id   | int(11)      | NO   | PRI | NULL              |       |
+| course_name | varchar(128) | NO   |     | NULL              |       |
+| course_desc | varchar(255) | NO   |     | NULL              |       |
+| course_type | int(1)       | NO   |     | NULL              |       |
+| url         | varchar(512) | NO   |     | NULL              |       |
+| size        | int(11)      | NO   |     | NULL              |       |
+| duration    | double       | YES  |     | NULL              |       |
+| pages       | int(11)      | YES  |     | NULL              |       |
+| editable    | int(1)       | NO   |     | NULL              |       |
+| visible     | int(1)       | NO   |     | NULL              |       |
+| created_by  | int(11)      | NO   | MUL | NULL              |       |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update | timestamp    | NO   | MUL | CURRENT_TIMESTAMP |       |
+| target      | int(11)      | YES  |     | NULL              |       |
+| perm        | int(11)      | NO   |     | NULL              |       |
++-------------+--------------+------+-----+-------------------+-------+
+15 rows in set (0.00 sec)
+
+mysql> desc dir_history;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| dir_id      | int(11)      | NO   | PRI | NULL              |       |
+| dir_name    | varchar(128) | NO   |     | NULL              |       |
+| subdirs     | int(11)      | NO   |     | NULL              |       |
+| resources   | int(11)      | NO   |     | NULL              |       |
+| parent_id   | int(11)      | NO   | MUL | NULL              |       |
+| origin_id   | int(11)      | YES  |     | NULL              |       |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update | timestamp    | NO   | MUL | CURRENT_TIMESTAMP |       |
++-------------+--------------+------+-----+-------------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc dir_root;
++-------------+-----------+------+-----+-------------------+-------+
+| Field       | Type      | Null | Key | Default           | Extra |
++-------------+-----------+------+-----+-------------------+-------+
+| dir_id      | int(11)   | NO   | PRI | NULL              |       |
+| employer_id | int(11)   | NO   | MUL | NULL              |       |
+| res_type    | int(3)    | NO   |     | NULL              |       |
+| root_type   | int(3)    | NO   |     | NULL              |       |
+| subdirs     | int(11)   | NO   |     | NULL              |       |
+| resources   | int(11)   | NO   |     | NULL              |       |
+| create_date | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+-----------+------+-----+-------------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc dir_tree;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| dir_id      | int(11)      | NO   | PRI | NULL              |       |
+| dir_name    | varchar(128) | NO   |     | NULL              |       |
+| subdirs     | int(11)      | NO   |     | NULL              |       |
+| resources   | int(11)      | NO   |     | NULL              |       |
+| parent_id   | int(11)      | NO   | MUL | NULL              |       |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update | timestamp    | NO   | MUL | CURRENT_TIMESTAMP |       |
++-------------+--------------+------+-----+-------------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc employer;
++------------------+---------------+------+-----+-------------------+-------+
+| Field            | Type          | Null | Key | Default           | Extra |
++------------------+---------------+------+-----+-------------------+-------+
+| employer_id      | int(11)       | NO   | PRI | NULL              |       |
+| register_type    | int(11)       | NO   |     | 1                 |       |
+| employer_type    | int(11)       | NO   |     | NULL              |       |
+| employer_name    | varchar(64)   | NO   |     | NULL              |       |
+| company_id       | int(11)       | NO   | MUL | NULL              |       |
+| dept_name        | varchar(100)  | YES  |     | NULL              |       |
+| belong_id        | int(11)       | YES  | MUL | NULL              |       |
+| username         | varchar(32)   | NO   |     | NULL              |       |
+| email            | varchar(64)   | YES  | MUL | NULL              |       |
+| phone            | varchar(20)   | YES  | MUL | NULL              |       |
+| external_id      | varchar(32)   | YES  |     | NULL              |       |
+| password         | varchar(128)  | NO   |     | NULL              |       |
+| state            | int(1)        | NO   |     | NULL              |       |
+| authorities      | varchar(256)  | YES  |     | NULL              |       |
+| features         | int(11)       | NO   |     | 0                 |       |
+| eff_date         | timestamp     | YES  |     | NULL              |       |
+| exp_date         | timestamp     | YES  |     | NULL              |       |
+| img_url          | varchar(512)  | YES  |     | NULL              |       |
+| short_desc       | varchar(128)  | YES  |     | NULL              |       |
+| long_desc        | varchar(1024) | YES  |     | NULL              |       |
+| create_date      | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| created_by       | int(11)       | NO   |     | 0                 |       |
+| client_ip        | varchar(256)  | YES  |     | NULL              |       |
+| os               | varchar(30)   | YES  |     | NULL              |       |
+| browser          | varchar(20)   | YES  |     | NULL              |       |
+| browser_version  | varchar(512)  | YES  |     | NULL              |       |
+| visit_track      | varchar(64)   | YES  |     | NULL              |       |
+| ip_region        | varchar(64)   | YES  |     | NULL              |       |
+| ip_city          | varchar(64)   | YES  |     | NULL              |       |
+| phone_region     | varchar(64)   | YES  |     | NULL              |       |
+| phone_city       | varchar(64)   | YES  |     | NULL              |       |
+| region_sync_flag | int(11)       | YES  |     | 0                 |       |
++------------------+---------------+------+-----+-------------------+-------+
+32 rows in set (0.00 sec)
+
+mysql> desc employer_account;
++-----------------+-----------+------+-----+-------------------+-----------------------------+
+| Field           | Type      | Null | Key | Default           | Extra                       |
++-----------------+-----------+------+-----+-------------------+-----------------------------+
+| employer_id     | int(11)   | NO   | PRI | NULL              |                             |
+| account_balance | int(11)   | NO   |     | NULL              |                             |
+| account_cash    | int(11)   | NO   |     | NULL              |                             |
+| account_reward  | int(11)   | NO   |     | NULL              |                             |
+| create_date     | timestamp | NO   |     | CURRENT_TIMESTAMP |                             |
+| last_update     | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-----------------+-----------+------+-----+-------------------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> desc employer_advertise;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| employer_id | int(11)      | NO   | PRI | NULL    |       |
+| score       | double       | NO   | PRI | NULL    |       |
+| pic_pc      | varchar(512) | YES  |     | NULL    |       |
+| pic_mobile  | varchar(512) | YES  |     | NULL    |       |
+| url_pc      | varchar(512) | YES  |     | NULL    |       |
+| url_mobile  | varchar(512) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc employer_bind;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| belong_id   | int(11)      | NO   | PRI | 0                 |       |
+| bind_type   | int(1)       | NO   | PRI | NULL              |       |
+| bind_id     | varchar(128) | NO   | PRI | NULL              |       |
+| employer_id | int(11)      | NO   | MUL | NULL              |       |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| valid       | int(1)       | NO   |     | NULL              |       |
++-------------+--------------+------+-----+-------------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc employer_config;
++------------------+---------------+------+-----+---------+-------+
+| Field            | Type          | Null | Key | Default | Extra |
++------------------+---------------+------+-----+---------+-------+
+| employer_id      | int(11)       | NO   | PRI | NULL    |       |
+| tests            | int(11)       | NO   |     | NULL    |       |
+| ad_enabled       | int(1)        | NO   |     | NULL    |       |
+| share_enabled    | int(1)        | NO   |     | NULL    |       |
+| remark_enabled   | int(1)        | NO   |     | NULL    |       |
+| redirect_url     | varchar(256)  | YES  |     | NULL    |       |
+| push_url         | varchar(256)  | YES  |     | NULL    |       |
+| password_enabled | int(1)        | NO   |     | 0       |       |
+| content          | varchar(1024) | YES  |     | NULL    |       |
++------------------+---------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc employer_contact;
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| Field       | Type      | Null | Key | Default           | Extra                       |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| employer_id | int(11)   | NO   | PRI | NULL              |                             |
+| contact_id  | int(11)   | NO   | PRI | NULL              |                             |
+| create_date | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc employer_contact_tag;
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| Field       | Type      | Null | Key | Default           | Extra                       |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| id          | int(11)   | NO   | PRI | NULL              |                             |
+| employer_id | int(11)   | NO   | MUL | NULL              |                             |
+| contact_id  | int(11)   | NO   |     | NULL              |                             |
+| tag_id      | int(11)   | NO   |     | NULL              |                             |
+| belong_id   | int(11)   | NO   |     | 0                 |                             |
+| create_date | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> desc employer_favorite;
++-------------+-----------+------+-----+-------------------+-------+
+| Field       | Type      | Null | Key | Default           | Extra |
++-------------+-----------+------+-----+-------------------+-------+
+| employer_id | int(11)   | NO   | PRI | NULL              |       |
+| res_type    | int(1)    | NO   | PRI | NULL              |       |
+| res_id      | int(11)   | NO   | PRI | NULL              |       |
+| last_update | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+-----------+------+-----+-------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc employer_finish;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| employer_id | int(11)      | NO   | PRI | NULL    |       |
+| score       | double       | NO   | PRI | NULL    |       |
+| title       | varchar(512) | YES  |     | NULL    |       |
+| remark      | varchar(512) | YES  |     | NULL    |       |
+| pic_pc      | varchar(512) | YES  |     | NULL    |       |
+| pic_mobile  | varchar(512) | YES  |     | NULL    |       |
+| url_pc      | varchar(512) | YES  |     | NULL    |       |
+| url_mobile  | varchar(512) | YES  |     | NULL    |       |
+| share_title | varchar(128) | YES  |     |         |       |
+| share_desc  | varchar(512) | YES  |     |         |       |
+| share_icon  | varchar(512) | YES  |     | NULL    |       |
+| hide_score  | int(1)       | NO   |     | 0       |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> desc employer_info_ext;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| employer_id   | int(11)      | NO   | PRI | NULL    |       |
+| info_id       | int(11)      | NO   | PRI | NULL    |       |
+| info_name     | varchar(64)  | NO   |     | NULL    |       |
+| seq           | int(11)      | NO   |     | NULL    |       |
+| data_type     | int(2)       | NO   |     | NULL    |       |
+| value_type    | int(2)       | NO   |     | NULL    |       |
+| value_content | mediumtext   | YES  |     | NULL    |       |
+| length_limit  | int(11)      | NO   |     | NULL    |       |
+| regex         | varchar(256) | YES  |     | NULL    |       |
+| required_type | int(1)       | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc employer_invite;
++--------------------+-------------+------+-----+---------+-------+
+| Field              | Type        | Null | Key | Default | Extra |
++--------------------+-------------+------+-----+---------+-------+
+| employer_id        | int(11)     | NO   | PRI | NULL    |       |
+| invite_code        | varchar(45) | NO   | MUL | NULL    |       |
+| invite_employer_id | int(11)     | NO   | MUL | NULL    |       |
+| gift_state         | int(11)     | YES  |     | 0       |       |
++--------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc employer_keyword;
++-------------+-----------+------+-----+-------------------+-------+
+| Field       | Type      | Null | Key | Default           | Extra |
++-------------+-----------+------+-----+-------------------+-------+
+| employer_id | int(11)   | NO   | PRI | NULL              |       |
+| res_type    | int(1)    | NO   | PRI | NULL              |       |
+| keywords    | text      | NO   |     | NULL              |       |
+| last_update | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+-----------+------+-----+-------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc employer_origin;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| origin      | varchar(32)  | NO   | PRI | NULL    |       |
+| auth_method | int(2)       | NO   |     | NULL    |       |
+| auth_url    | varchar(256) | NO   |     | NULL    |       |
+| secret      | varchar(32)  | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc employer_resource;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| employer_id | int(11) | NO   | PRI | NULL    |       |
+| test_total  | int(11) | NO   |     | NULL    |       |
+| test_used   | int(11) | NO   |     | NULL    |       |
+| msg_total   | int(11) | NO   |     | NULL    |       |
+| msg_used    | int(11) | NO   |     | NULL    |       |
+| pdf_total   | int(11) | YES  |     | 0       |       |
+| pdf_used    | int(11) | YES  |     | 0       |       |
++-------------+---------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc employer_sign;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| employer_id | int(11)      | NO   | PRI | NULL    |       |
+| public_key  | varchar(512) | NO   |     | NULL    |       |
+| private_key | varchar(512) | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc employer_stat;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| employer_id | int(11) | NO   | PRI | NULL    |       |
+| papers      | int(11) | NO   |     | NULL    |       |
+| banks       | int(11) | NO   |     | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc employer_tag;
++-------------+--------------+------+-----+-------------------+-----------------------------+
+| Field       | Type         | Null | Key | Default           | Extra                       |
++-------------+--------------+------+-----+-------------------+-----------------------------+
+| tag_id      | int(11)      | NO   | PRI | NULL              |                             |
+| belong_id   | int(11)      | NO   |     | 0                 |                             |
+| tag_name    | varchar(30)  | NO   |     | NULL              |                             |
+| type        | int(2)       | NO   |     | NULL              |                             |
+| extension   | varchar(255) | YES  |     | NULL              |                             |
+| employer_id | int(11)      | NO   | MUL | NULL              |                             |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |                             |
+| last_update | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+--------------+------+-----+-------------------+-----------------------------+
+8 rows in set (0.00 sec)
+
+mysql> desc exchange_link;
++-------------------+--------------+------+-----+-------------------+-----------------------------+
+| Field             | Type         | Null | Key | Default           | Extra                       |
++-------------------+--------------+------+-----+-------------------+-----------------------------+
+| link_id           | int(11)      | NO   | PRI | NULL              |                             |
+| link_name         | varchar(256) | NO   |     | NULL              |                             |
+| link_url          | varchar(256) | NO   |     | NULL              |                             |
+| link_user         | varchar(256) | NO   |     | NULL              |                             |
+| link_contact_info | varchar(256) | NO   |     | NULL              |                             |
+| create_date       | timestamp    | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+e;
+desc incr_question;
+desc interview;
+desc interview_notify;
+desc interviewee;
+desc interviewer;
+desc log_operation;
+desc log_recharge;
+desc notify_detail;
+desc notify_summary;
+desc oauth_access_token;
+desc oauth_client_details;
+desc oauth_client_token;
+desc oauth_code;
+desc oauth_refresh_token;
+desc paper;
+desc paper_area;
+desc paper_config;
+desc paper_finish;
+desc paper_info_ext;
+desc paper_part;
+desc paper_relation;
+desc persistent_logins;
+desc qb_base;
+desc qb_question;
+desc qb_question_url_process;
+de+-------------------+--------------+------+-----+-------------------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> desc identity_code;
++--------------+-------------+------+-----+----------------------------+-----------------------------+
+| Field        | Type        | Null | Key | Default                    | Extra                       |
++--------------+-------------+------+-----+----------------------------+-----------------------------+
+| id           | int(11)     | NO   | PRI | NULL                       |                             |
+| account      | varchar(64) | NO   | MUL | 账号-手机号/邮箱号         |                             |
+| account_type | int(11)     | NO   |     | NULL                       |                             |
+| code         | varchar(20) | NO   |     | NULL                       |                             |
+| exp_date     | timestamp   | NO   |     | CURRENT_TIMESTAMP          | on update CURRENT_TIMESTAMP |
+| create_date  | timestamp   | NO   |     | 2020-12-24 09:37:00        | on update CURRENT_TIMESTAMP |
++--------------+-------------+------+-----+----------------------------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> desc incr_question;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| serial_id       | bigint(20)   | NO   | PRI | NULL    | auto_increment |
+| paper_id        | int(11)      | NO   |     | NULL    |                |
+| question_id     | bigint(20)   | NO   |     | NULL    |                |
+| sub_id          | bigint(20)   | NO   |     | NULL    |                |
+| total_incr      | int(11)      | NO   |     | NULL    |                |
+| answer_incr     | int(11)      | NO   |     | NULL    |                |
+| correct_incr    | int(11)      | NO   |     | NULL    |                |
+| spend_time_incr | int(11)      | NO   |     | NULL    |                |
+| score_incr      | double       | NO   |     | NULL    |                |
+| choice_incr     | varchar(128) | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+10 rows in set (0.00 sec)
+
+mysql> desc interview;
++--------------+---------------+------+-----+-------------------+-------+
+| Field        | Type          | Null | Key | Default           | Extra |
++--------------+---------------+------+-----+-------------------+-------+
+| interview_id | int(11)       | NO   | PRI | NULL              |       |
+| employer_id  | int(11)       | NO   |     | NULL              |       |
+| candidate_id | int(11)       | NO   |     | NULL              |       |
+| activity_id  | int(11)       | NO   | MUL | NULL              |       |
+| round        | int(11)       | NO   |     | NULL              |       |
+| score        | int(2)        | NO   |     | NULL              |       |
+| remark       | varchar(1024) | NO   |     | NULL              |       |
+| interviewer  | varchar(128)  | NO   |     | NULL              |       |
+| state        | int(1)        | NO   |     | NULL              |       |
+| create_date  | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update  | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
++--------------+---------------+------+-----+-------------------+-------+
+11 rows in set (0.00 sec)
+
+mysql> desc interview_notify;
++--------------+------------+------+-----+-------------------+-------+
+| Field        | Type       | Null | Key | Default           | Extra |
++--------------+------------+------+-----+-------------------+-------+
+| id           | int(11)    | NO   | PRI | NULL              |       |
+| activity_id  | int(11)    | NO   | MUL | NULL              |       |
+| candidate_id | int(11)    | NO   |     | NULL              |       |
+| employer_id  | int(11)    | NO   |     | NULL              |       |
+| notify_type  | int(11)    | NO   |     | NULL              |       |
+| content      | mediumtext | YES  |     | NULL              |       |
+| state        | int(1)     | NO   |     | NULL              |       |
+| sent_id      | bigint(20) | YES  | MUL | NULL              |       |
+| create_date  | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update  | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
++--------------+------------+------+-----+-------------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc interviewee;
++-----------------+-------------+------+-----+-------------------+-------+
+| Field           | Type        | Null | Key | Default           | Extra |
++-----------------+-------------+------+-----+-------------------+-------+
+| activity_id     | int(11)     | NO   | PRI | NULL              |       |
+| candidate_id    | int(11)     | NO   | PRI | NULL              |       |
+| employer_id     | int(11)     | NO   |     | NULL              |       |
+| candidate_name  | varchar(30) | YES  |     | NULL              |       |
+| candidate_uid   | varchar(64) | YES  |     | NULL              |       |
+| candidate_phone | varchar(20) | YES  |     | NULL              |       |
+| create_date     | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update     | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
++-----------------+-------------+------+-----+-------------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc interviewer;
++----------------+-----------+------+-----+-------------------+-------+
+| Field          | Type      | Null | Key | Default           | Extra |
++----------------+-----------+------+-----+-------------------+-------+
+| interviewer_id | int(11)   | NO   | PRI | NULL              |       |
+| activity_id    | int(11)   | NO   | PRI | NULL              |       |
+| employer_id    | int(11)   | NO   | MUL | NULL              |       |
+| create_date    | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update    | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++----------------+-----------+------+-----+-------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc log_operation;
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| Field       | Type          | Null | Key | Default           | Extra                       |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+| log_id      | int(11)       | NO   | PRI | NULL              |                             |
+| log_type    | int(11)       | NO   |     | NULL              |                             |
+| employer_id | int(11)       | NO   |     | NULL              |                             |
+| content     | varchar(1024) | NO   |     | NULL              |                             |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+---------------+------+-----+-------------------+-----------------------------+
+5 rows in set (0.00 sec)
+
+mysql> desc log_recharge;
++--------------+---------------+------+-----+---------------------+-----------------------------+
+| Field        | Type          | Null | Key | Default             | Extra                       |
++--------------+---------------+------+-----+---------------------+-----------------------------+
+| purchase_id  | int(11)       | NO   | PRI | NULL                |                             |
+| employer_id  | int(11)       | NO   |     | NULL                |                             |
+| price        | int(11)       | NO   |     | NULL                |                             |
+| pay_type     | int(11)       | NO   |     | NULL                |                             |
+| charge_type  | int(11)       | NO   |     | NULL                |                             |
+| pay_state    | int(11)       | NO   |     | NULL                |                             |
+| pay_trade_id | varchar(128)  | YES  |     | NULL                |                             |
+| content      | varchar(2048) | YES  |     | NULL                |                             |
+| create_date  | timestamp     | NO   |     | CURRENT_TIMESTAMP   | on update CURRENT_TIMESTAMP |
+| last_update  | timestamp     | NO   |     | 2020-12-24 09:37:00 |                             |
++--------------+---------------+------+-----+---------------------+-----------------------------+
+10 rows in set (0.00 sec)
+
+mysql> desc notify_detail;
++-------------+------------+------+-----+-------------------+-------+
+| Field       | Type       | Null | Key | Default           | Extra |
++-------------+------------+------+-----+-------------------+-------+
+| id          | bigint(20) | NO   | PRI | NULL              |       |
+| type        | int(1)     | NO   |     | NULL              |       |
+| employer_id | int(11)    | NO   | MUL | NULL              |       |
+| content     | mediumtext | NO   |     | NULL              |       |
+| last_update | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
+| attrs       | mediumtext | YES  |     | NULL              |       |
++-------------+------------+------+-----+-------------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc notify_summary;
++-------------+-----------+------+-----+-------------------+-------+
+| Field       | Type      | Null | Key | Default           | Extra |
++-------------+-----------+------+-----+-------------------+-------+
+| employer_id | int(11)   | NO   | PRI | NULL              |       |
+| unread      | int(11)   | NO   |     | NULL              |       |
+| last_update | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+-----------+------+-----+-------------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc oauth_access_token;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| token_id          | varchar(32) | NO   | PRI | NULL    |       |
+| token             | blob        | NO   |     | NULL    |       |
+| authentication_id | varchar(32) | NO   | UNI | NULL    |       |
+| user_name         | varchar(32) | NO   | MUL | NULL    |       |
+| client_id         | varchar(32) | NO   | MUL | NULL    |       |
+| authentication    | blob        | NO   |     | NULL    |       |
+| refresh_token     | varchar(32) | YES  | MUL | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc oauth_client_details;
++------------------------+--------------+------+-----+---------+-------+
+| Field                  | Type         | Null | Key | Default | Extra |
++------------------------+--------------+------+-----+---------+-------+
+| client_id              | varchar(32)  | NO   | PRI | NULL    |       |
+| resource_ids           | varchar(256) | YES  |     | NULL    |       |
+| client_secret          | varchar(256) | YES  |     | NULL    |       |
+| scope                  | varchar(256) | YES  |     | NULL    |       |
+| authorized_grant_types | varchar(256) | YES  |     | NULL    |       |
+| redirect_uri           | varchar(256) | YES  |     | NULL    |       |
+| authorities            | varchar(256) | YES  |     | NULL    |       |
+| access_token_validity  | int(11)      | YES  |     | NULL    |       |
+| refresh_token_validity | int(11)      | YES  |     | NULL    |       |
+| additional_information | mediumtext   | YES  |     | NULL    |       |
+| auto_approve           | varchar(256) | YES  |     | NULL    |       |
++------------------------+--------------+------+-----+---------+-------+
+11 rows in set (0.00 sec)
+
+mysql> desc oauth_client_token;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| token_id          | varchar(32) | NO   | PRI | NULL    |       |
+| token             | blob        | NO   |     | NULL    |       |
+| authentication_id | varchar(32) | NO   | UNI | NULL    |       |
+| user_name         | varchar(32) | NO   |     | NULL    |       |
+| client_id         | varchar(32) | NO   |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc oauth_code;
++----------------+-------------+------+-----+-------------------+-------+
+| Field          | Type        | Null | Key | Default           | Extra |
++----------------+-------------+------+-----+-------------------+-------+
+| code           | varchar(32) | NO   | PRI | NULL              |       |
+| authentication | blob        | NO   |     | NULL              |       |
+| expires_at     | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
++----------------+-------------+------+-----+-------------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc oauth_refresh_token;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| token_id       | varchar(32) | NO   | PRI | NULL    |       |
+| token          | blob        | NO   |     | NULL    |       |
+| authentication | blob        | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc paper;
++------------------+---------------+------+-----+-------------------+-------+
+| Field            | Type          | Null | Key | Default           | Extra |
++------------------+---------------+------+-----+-------------------+-------+
+| paper_id         | int(11)       | NO   | PRI | NULL              |       |
+| paper_name       | varchar(100)  | NO   |     | NULL              |       |
+| paper_desc       | varchar(1000) | NO   |     | NULL              |       |
+| paper_guide      | text          | YES  |     | NULL              |       |
+| paper_pic        | varchar(256)  | YES  |     | NULL              |       |
+| paper_icon       | varchar(256)  | YES  |     | NULL              |       |
+| paper_time       | int(11)       | YES  |     | NULL              |       |
+| parts_time       | int(11)       | YES  |     | NULL              |       |
+| part_backward    | int(1)        | NO   |     | 0                 |       |
+| questions        | int(11)       | YES  |     | NULL              |       |
+| points           | double        | NO   |     | NULL              |       |
+| grouped          | int(1)        | NO   |     | NULL              |       |
+| group_relation   | mediumtext    | YES  |     | NULL              |       |
+| created_by       | int(11)       | NO   | MUL | NULL              |       |
+| create_date      | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update      | timestamp     | NO   | MUL | CURRENT_TIMESTAMP |       |
+| passcode         | varchar(6)    | YES  |     | NULL              |       |
+| required_devices | int(1)        | NO   |     | NULL              |       |
+| perm             | int(11)       | NO   |     | NULL              |       |
+| param_content    | mediumtext    | YES  |     | NULL              |       |
+| begin_date       | timestamp     | YES  |     | NULL              |       |
+| end_date         | timestamp     | YES  |     | NULL              |       |
+| admission_time   | int(11)       | YES  |     | NULL              |       |
+| estimated_num    | int(11)       | YES  |     | NULL              |       |
+| address_ids      | varchar(255)  | YES  |     | NULL              |       |
+| report_type      | varchar(32)   | YES  |     | NULL              |       |
+| origin_id        | int(11)       | NO   |     | NULL              |       |
+| target           | int(11)       | YES  |     | NULL              |       |
+| server           | varchar(256)  | YES  |     | NULL              |       |
+| editable         | int(1)        | NO   |     | NULL              |       |
+| visible          | int(1)        | NO   |     | NULL              |       |
+| notice           | varchar(1000) | YES  |     | NULL              |       |
+| notice_date      | timestamp     | YES  |     | NULL              |       |
++------------------+---------------+------+-----+-------------------+-------+
+33 rows in set (0.01 sec)
+
+mysql> desc paper_area;
++--------------------------+--------------+------+-----+---------+-------+
+| Field                    | Type         | Null | Key | Default | Extra |
++--------------------------+--------------+------+-----+---------+-------+
+| paper_id                 | int(11)      | NO   | PRI | NULL    |       |
+| busi_reg_province_code   | varchar(128) | YES  |     | NULL    |       |
+| busi_reg_city_code       | varchar(128) | YES  |     | NULL    |       |
+| busi_reg_county_code     | varchar(128) | YES  |     | NULL    |       |
+| busi_reg_area_code       | varchar(128) | YES  |     | NULL    |       |
+| busi_reg_grid_code       | varchar(128) | YES  |     | NULL    |       |
+| busi_reg_micro_area_code | varchar(128) | YES  |     | NULL    |       |
+| area_code                | varchar(128) | YES  |     | NULL    |       |
+| busi_reg_province_name   | varchar(32)  | YES  |     | NULL    |       |
+| busi_reg_city_name       | varchar(32)  | YES  |     | NULL    |       |
+| busi_reg_county_name     | varchar(32)  | YES  |     | NULL    |       |
+| busi_reg_area_name       | varchar(32)  | YES  |     | NULL    |       |
+| busi_reg_name            | varchar(32)  | YES  |     | NULL    |       |
++--------------------------+--------------+------+-----+---------+-------+
+13 rows in set (0.00 sec)
+
+mysql> desc paper_config;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| paper_id       | int(11)      | NO   | PRI | NULL    |       |
+| enabled        | int(1)       | NO   |     | 1       |       |
+| ad_enabled     | int(1)       | NO   |     | 1       |       |
+| share_enabled  | int(1)       | NO   |     | NULL    |       |
+| remark_enabled | int(1)       | NO   |     | NULL    |       |
+| redirect_url   | varchar(256) | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc paper_finish;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| paper_id    | int(11)      | NO   | PRI | NULL    |       |
+| score       | double       | NO   | PRI | NULL    |       |
+| title       | varchar(512) | YES  |     | NULL    |       |
+| remark      | varchar(512) | YES  |     | NULL    |       |
+| pic_pc      | varchar(512) | YES  |     | NULL    |       |
+| pic_mobile  | varchar(512) | YES  |     | NULL    |       |
+| url_pc      | varchar(512) | YES  |     | NULL    |       |
+| url_mobile  | varchar(512) | YES  |     | NULL    |       |
+| share_title | varchar(128) | YES  |     |         |       |
+| share_desc  | varchar(512) | YES  |     |         |       |
+| share_icon  | varchar(512) | YES  |     | NULL    |       |
+| hide_score  | int(1)       | NO   |     | 0       |       |
++-------------+--------------+------+-----+---------+-------+
+12 rows in set (0.00 sec)
+
+mysql> desc paper_info_ext;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| paper_id      | int(11)      | NO   | PRI | -1      |       |
+| info_id       | int(11)      | NO   | PRI | NULL    |       |
+| info_name     | varchar(64)  | NO   |     | NULL    |       |
+| seq           | int(11)      | NO   |     | NULL    |       |
+| data_type     | int(2)       | NO   |     | NULL    |       |
+| value_type    | int(2)       | NO   |     | NULL    |       |
+| value_content | mediumtext   | YES  |     | NULL    |       |
+| length_limit  | int(11)      | NO   |     | NULL    |       |
+| regex         | varchar(256) | YES  |     | NULL    |       |
+| required_type | int(1)       | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc paper_part;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| paper_id     | int(11)      | NO   | PRI | NULL    |       |
+| part_seq     | int(11)      | NO   | PRI | NULL    |       |
+| part_name    | varchar(255) | NO   |     | NULL    |       |
+| part_guide   | text         | YES  |     | NULL    |       |
+| question_num | int(11)      | NO   |     | NULL    |       |
+| part_time    | int(11)      | YES  |     | NULL    |       |
+| part_points  | double       | YES  |     | NULL    |       |
+| part_flags   | int(11)      | NO   |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc paper_relation;
++-------------------+--------------+------+-----+---------+-------+
+| Field             | Type         | Null | Key | Default | Extra |
++-------------------+--------------+------+-----+---------+-------+
+| paper_id          | int(11)      | NO   | PRI | NULL    |       |
+| part_seq          | int(11)      | NO   |     | NULL    |       |
+| relation_id       | bigint(20)   | NO   | PRI | NULL    |       |
+| point             | double       | NO   |     | NULL    |       |
+| program_languages | varchar(512) | YES  |     | NULL    |       |
+| question_seq      | int(11)      | NO   |     | NULL    |       |
+| sub_points        | varchar(512) | YES  |     | NULL    |       |
++-------------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc persistent_logins;
+sc qb_relation;
+desc qb_skill;
+desc resource_aliyun;
+desc resource_catalog;
+desc resource_comment;
+desc resource_meta;
+desc resource_publish;
+desc resource_purchase;
+desc resource_seek;
+desc resource_usage;
+desc schd_breakpoint;
+desc search_keyword;
+desc s+-----------+--------------+------+-----+-------------------+-------+
+| Field     | Type         | Null | Key | Default           | Extra |
++-----------+--------------+------+-----+-------------------+-------+
+| series    | varchar(64)  | NO   | PRI | NULL              |       |
+| user_name | varchar(128) | NO   | MUL | NULL              |       |
+| token     | varchar(64)  | NO   |     | NULL              |       |
+| last_used | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
++-----------+--------------+------+-----+-------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc qb_base;
++-------------+---------------+------+-----+-------------------+-------+
+| Field       | Type          | Null | Key | Default           | Extra |
++-------------+---------------+------+-----+-------------------+-------+
+| qb_id       | int(11)       | NO   | PRI | NULL              |       |
+| qb_name     | varchar(128)  | NO   |     | NULL              |       |
+| qb_desc     | varchar(1024) | NO   |     | NULL              |       |
+| editable    | int(1)        | NO   |     | NULL              |       |
+| visible     | int(1)        | NO   |     | NULL              |       |
+| created_by  | int(11)       | NO   | MUL | NULL              |       |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update | timestamp     | NO   | MUL | CURRENT_TIMESTAMP |       |
+| target      | int(11)       | YES  |     | NULL              |       |
+| perm        | int(11)       | NO   |     | 1359              |       |
++-------------+---------------+------+-----+-------------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc qb_question;
++------------------+-------------+------+-----+-------------------+-------+
+| Field            | Type        | Null | Key | Default           | Extra |
++------------------+-------------+------+-----+-------------------+-------+
+| question_id      | bigint(20)  | NO   | PRI | NULL              |       |
+| question_type    | int(2)      | NO   | MUL | NULL              |       |
+| combination_type | int(1)      | NO   |     | NULL              |       |
+| time_limit       | int(11)     | NO   |     | 0                 |       |
+| sample           | int(1)      | NO   |     | 0                 |       |
+| created_by       | int(11)     | NO   |     | NULL              |       |
+| last_update      | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
+| html             | int(1)      | NO   |     | 0                 |       |
+| content          | longtext    | NO   |     | NULL              |       |
+| md5              | varchar(64) | NO   | MUL | NULL              |       |
++------------------+-------------+------+-----+-------------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc qb_question_url_process;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| url_md5      | varchar(32)   | NO   | PRI | NULL    |       |
+| url          | varchar(1024) | NO   |     | NULL    |       |
+| unescape_url | varchar(1024) | NO   |     | NULL    |       |
+| question_ids | varchar(2048) | YES  |     | NULL    |       |
+| create_date  | timestamp     | YES  |     | NULL    |       |
+| last_update  | timestamp     | YES  |     | NULL    |       |
+| path         | varchar(256)  | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc qb_relation;
++-------------------+-------------+------+-----+-------------------+-------+
+| Field             | Type        | Null | Key | Default           | Extra |
++-------------------+-------------+------+-----+-------------------+-------+
+| relation_id       | bigint(20)  | NO   | PRI | NULL              |       |
+| question_id       | bigint(20)  | NO   | MUL | NULL              |       |
+| question_type     | int(2)      | NO   | MUL | NULL              |       |
+| qb_id             | int(11)     | NO   | MUL | NULL              |       |
+| difficulty        | int(2)      | NO   |     | 0                 |       |
+| skill_id          | varchar(13) | NO   |     | NULL              |       |
+| subs              | int(2)      | NO   |     | 0                 |       |
+| program_languages | varchar(64) | NO   |     |                   |       |
+| relation_version  | bigint(20)  | NO   |     | NULL              |       |
+| last_update       | timestamp   | NO   | MUL | CURRENT_TIMESTAMP |       |
+| created_by        | int(11)     | NO   |     | -1                |       |
++-------------------+-------------+------+-----+-------------------+-------+
+11 rows in set (0.00 sec)
+
+mysql> desc qb_skill;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| skill_id    | varchar(13)  | NO   | PRI | NULL    |       |
+| skill_name1 | varchar(128) | NO   | MUL | NULL    |       |
+| skill_name2 | varchar(128) | NO   |     |         |       |
+| skill_name3 | varchar(128) | NO   |     |         |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc resource_aliyun;
++----------------+------------+------+-----+-------------------+-------+
+| Field          | Type       | Null | Key | Default           | Extra |
++----------------+------------+------+-----+-------------------+-------+
+| id             | int(11)    | NO   | PRI | NULL              |       |
+| apply_content  | mediumtext | NO   |     | NULL              |       |
+| aliyun_content | mediumtext | YES  |     | NULL              |       |
+| state          | int(11)    | NO   | MUL | NULL              |       |
+| employer_id    | int(11)    | NO   |     | NULL              |       |
+| create_date    | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update    | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
++----------------+------------+------+-----+-------------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc resource_catalog;
++--------------+--------------+------+-----+-------------------+-------+
+| Field        | Type         | Null | Key | Default           | Extra |
++--------------+--------------+------+-----+-------------------+-------+
+| catalog_id   | int(11)      | NO   | PRI | NULL              |       |
+| catalog_name | varchar(128) | NO   | MUL | NULL              |       |
+| parent_id    | int(11)      | NO   |     | NULL              |       |
+| create_date  | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| seq          | int(11)      | NO   |     | NULL              |       |
+| company_id   | int(11)      | NO   | MUL | 0                 |       |
++--------------+--------------+------+-----+-------------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc resource_comment;
++---------------+--------------+------+-----+-------------------+-------+
+| Field         | Type         | Null | Key | Default           | Extra |
++---------------+--------------+------+-----+-------------------+-------+
+| purchase_id   | int(11)      | NO   | PRI | NULL              |       |
+| employer_id   | int(11)      | NO   |     | NULL              |       |
+| res_type      | int(1)       | NO   | MUL | NULL              |       |
+| res_id        | int(11)      | NO   |     | NULL              |       |
+| employer_name | varchar(64)  | NO   |     | NULL              |       |
+| img_url       | varchar(512) | YES  |     | NULL              |       |
+| score         | double       | NO   |     | NULL              |       |
+| discuss       | text         | YES  |     | NULL              |       |
+| last_update   | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
++---------------+--------------+------+-----+-------------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc resource_meta;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| res_id     | int(11)      | NO   | PRI | NULL    |       |
+| res_type   | int(3)       | NO   | PRI | NULL    |       |
+| dir_id     | int(11)      | NO   |     | NULL    |       |
+| root_type  | int(11)      | YES  |     | NULL    |       |
+| origin_id  | int(11)      | YES  |     | NULL    |       |
+| catalog_id | int(11)      | YES  |     | NULL    |       |
+| tags       | varchar(512) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc resource_publish;
++------------------+-----------+------+-----+-------------------+-------+
+| Field            | Type      | Null | Key | Default           | Extra |
++------------------+-----------+------+-----+-------------------+-------+
+| res_id           | int(11)   | NO   | PRI | NULL              |       |
+| res_type         | int(11)   | NO   | PRI | NULL              |       |
+| employer_id      | int(11)   | NO   |     | NULL              |       |
+| purchase_type    | int(11)   | NO   |     | NULL              |       |
+| price            | int(11)   | NO   |     | NULL              |       |
+| purchases        | int(11)   | NO   |     | NULL              |       |
+| score            | int(11)   | NO   |     | NULL              |       |
+| comment_no       | int(11)   | NO   |     | NULL              |       |
+| state            | int(11)   | NO   |     | NULL              |       |
+| create_date      | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update      | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
+| company_id       | int(11)   | NO   |     | 0                 |       |
+| replace_question | int(1)    | NO   |     | NULL              |       |
+| show_num         | int(11)   | YES  |     | NULL              |       |
++------------------+-----------+------+-----+-------------------+-------+
+14 rows in set (0.00 sec)
+
+mysql> desc resource_purchase;
++---------------+---------------+------+-----+-------------------+-----------------------------+
+| Field         | Type          | Null | Key | Default           | Extra                       |
++---------------+---------------+------+-----+-------------------+-----------------------------+
+| purchase_id   | int(11)       | NO   | PRI | NULL              |                             |
+| res_type      | int(11)       | NO   | MUL | NULL              |                             |
+| res_id        | int(11)       | NO   |     | NULL              |                             |
+| price         | int(11)       | NO   |     | NULL              |                             |
+| purchase_type | int(11)       | NO   |     | NULL              |                             |
+| purchase_num  | int(11)       | NO   |     | 1                 |                             |
+| pay_type      | int(11)       | NO   |     | NULL              |                             |
+| pay_state     | int(11)       | NO   |     | NULL              |                             |
+| seller_id     | int(11)       | NO   | MUL | NULL              |                             |
+| buyer_id      | int(11)       | NO   | MUL | NULL              |                             |
+| create_date   | timestamp     | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| pay_trade_id  | varchar(128)  | YES  |     | NULL              |                             |
+| content       | varchar(2048) | YES  |     | NULL              |                             |
+| purchase_req  | varchar(1024) | YES  |     | NULL              |                             |
+| score         | int(11)       | YES  |     | NULL              |                             |
++---------------+---------------+------+-----+-------------------+-----------------------------+
+15 rows in set (0.00 sec)
+
+mysql> desc resource_seek;
++---------------+---------------+------+-----+-------------------+-------+
+| Field         | Type          | Null | Key | Default           | Extra |
++---------------+---------------+------+-----+-------------------+-------+
+| seek_id       | int(11)       | NO   | PRI | NULL              |       |
+| resource_name | varchar(256)  | NO   |     | NULL              |       |
+| resource_desc | varchar(2000) | NO   |     | NULL              |       |
+| price         | int(11)       | NO   |     | NULL              |       |
+| contact       | varchar(256)  | YES  |     | NULL              |       |
+| contact_way   | varchar(256)  | YES  |     | NULL              |       |
+| employer_id   | int(11)       | YES  |     | NULL              |       |
+| state         | int(11)       | NO   |     | NULL              |       |
+| create_date   | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
++---------------+---------------+------+-----+-------------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc resource_usage;
++-------------+-----------+------+-----+-------------------+-------+
+| Field       | Type      | Null | Key | Default           | Extra |
++-------------+-----------+------+-----+-------------------+-------+
+| employer_id | int(11)   | NO   | PRI | NULL              |       |
+| res_type    | int(1)    | NO   | PRI | NULL              |       |
+| amount      | int(11)   | NO   |     | NULL              |       |
+| max_amount  | int(11)   | NO   |     | NULL              |       |
+| last_update | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+-----------+------+-----+-------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc schd_breakpoint;
++-------------+-----------+------+-----+-------------------+-------+
+| Field       | Type      | Null | Key | Default           | Extra |
++-------------+-----------+------+-----+-------------------+-------+
+| schd_type   | int(11)   | NO   | PRI | NULL              |       |
+| last_update | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+-----------+------+-----+-------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc search_keyword;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| res_type    | int(11)      | NO   | PRI | NULL              |       |
+| keyword     | varchar(128) | NO   | PRI | NULL              |       |
+| times       | int(11)      | NO   |     | NULL              |       |
+| last_update | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+--------------+------+-----+-------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc search_tag;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| tag_name    | varchar(128) | NO   | PRI | NULL              |       |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+--------------+------+-----+-------------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc share_anonymous;
++------------+--------------+------+-----+-------------------+-------+
+| Field      | Type         | Null | Key | Default           | Extra |
++------------+--------------+------+-----+-------------------+-------+
+| share_id   | int(11)      | NO   | PRI | NULL              |       |
+| authorizer | int(11)      | NO   | MUL | NULL              |       |
+| expired_at | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| perm       | int(11)      | NO   |     | NULL              |       |
+| url        | varchar(255) | NO   |     | NULL              |       |
+| valid      | int(1)       | NO   |     | NULL              |       |
++------------+--------------+------+-----+-------------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc share_link;
++-------------------+-----------+------+-----+-------------------+-------+
+| Field             | Type      | Null | Key | Default           | Extra |
++-------------------+-----------+------+-----+-------------------+-------+
+| link_id           | int(11)   | NO   | PRI | NULL              |       |
+| employer_id       | int(11)   | NO   | MUL | NULL              |       |
+| share_id          | int(11)   | NO   |     | NULL              |       |
+| res_type          | int(1)    | NO   | MUL | NULL              |       |
+| res_id            | int(11)   | NO   |     | NULL              |       |
+| target            | int(11)   | NO   |     | NULL              |       |
+| notification_type | int(1)    | NO   |     | NULL              |       |
+| visible           | int(1)    | NO   |     | NULL              |       |
+| last_update       | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
++-------------------+-----------+------+-----+-------------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc share_track;
++-------------+------------+------+-----+-------------------+-------+
+| Field       | Type       | Null | Key | Default           | Extra |
++-------------+------------+------+-----+-------------------+-------+
+| share_type  | int(11)    | NO   | PRI | NULL              |       |
+| id          | bigint(20) | NO   | PRI | NULL              |       |
+| times       | int(11)    | NO   |     | NULL              |       |
+| last_update | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+------------+------+-----+-------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc share_user;
++-----------------+------------+------+-----+-------------------+-------+
+| Field           | Type       | Null | Key | Default           | Extra |
++-----------------+------------+------+-----+-------------------+-------+
+| share_id        | int(11)    | NO   | PRI | NULL              |       |
+| authorizer      | int(11)    | NO   | MUL | NULL              |       |
+| authorized_type | int(1)     | NO   | MUL | NULL              |       |
+| authorized      | int(11)    | NO   |     | NULL              |       |
+| res_type        | int(1)     | NO   | MUL | NULL              |       |
+| res_id          | int(11)    | NO   |     | NULL              |       |
+| perm            | int(11)    | NO   |     | NULL              |       |
+| expired_at      | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
+| chain           | mediumtext | YES  |     | NULL              |       |
+| last_update     | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
++-----------------+------------+------+-----+-------------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc stat_clazz;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| clazz_id  | int(11) | NO   | PRI | NULL    |       |
+| on_goings | int(11) | NO   |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> desc stat_company;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| company_id   | int(11) | NO   | PRI | NULL    |       |
+| papers       | int(11) | NO   |     | NULL    |       |
+| banks        | int(11) | NO   |     | NULL    |       |
+| clazzs       | int(11) | NO   |     | NULL    |       |
+| qb_relations | int(11) | NO   |     | NULL    |       |
+| reports      | int(11) | NO   |     | NULL    |       |
+| on_goings    | int(11) | NO   |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc stat_company_date;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| company_id   | int(11) | NO   | PRI | NULL    |       |
+| papers       | int(11) | NO   |     | NULL    |       |
+| banks        | int(11) | NO   |     | NULL    |       |
+| clazzs       | int(11) | NO   |     | NULL    |       |
+| qb_relations | int(11) | NO   |     | NULL    |       |
+| reports      | int(11) | NO   |     | NULL    |       |
+| date_day     | int(11) | NO   |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc stat_company_day;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| company_id   | int(11) | NO   | PRI | NULL    |       |
+| papers       | int(11) | NO   |     | NULL    |       |
+| banks        | int(11) | NO   |     | NULL    |       |
+| clazzs       | int(11) | NO   |     | NULL    |       |
+| qb_relations | int(11) | NO   |     | NULL    |       |
+| reports      | int(11) | NO   |     | NULL    |       |
+| date_day     | int(11) | NO   | PRI | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc stat_employer;
++---------------+---------+------+-----+---------+-------+
+| Field         | Type    | Null | Key | Default | Extra |
++---------------+---------+------+-----+---------+-------+
+| employer_id   | int(11) | NO   | PRI | NULL    |       |
+| papers        | int(11) | NO   |     | NULL    |       |
+| banks         | int(11) | NO   |     | NULL    |       |
+| clazzs        | int(11) | NO   |     | NULL    |       |
+| qb_relations  | int(11) | NO   |     | NULL    |       |
+| reports       | int(11) | NO   |     | NULL    |       |
+| on_goings     | int(11) | NO   |     | NULL    |       |
+| max_on_goings | int(11) | YES  |     | 0       |       |
+| email_sends   | int(11) | YES  |     | 0       |       |
++---------------+---------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc stat_employer_day;
++---------------+---------+------+-----+---------+-------+
+| Field         | Type    | Null | Key | Default | Extra |
++---------------+---------+------+-----+---------+-------+
+| employer_id   | int(11) | NO   | PRI | NULL    |       |
+| papers        | int(11) | NO   |     | NULL    |       |
+| banks         | int(11) | NO   |     | NULL    |       |
+| clazzs        | int(11) | NO   |     | NULL    |       |
+| qb_relations  | int(11) | NO   |     | NULL    |       |
+| reports       | int(11) | NO   |     | NULL    |       |
+| date_day      | int(11) | NO   | PRI | NULL    |       |
+| on_goings     | int(11) | YES  |     | 0       |       |
+| max_on_goings | int(11) | YES  |     | 0       |       |
+| email_sends   | int(11) | YES  |     | 0       |       |
++---------------+---------+------+-----+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc stat_paper;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| paper_id    | int(11) | NO   | PRI | NULL    |       |
+| invitations | int(11) | NO   |     | NULL    |       |
+| on_goings   | int(11) | NO   |     | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc stat_paper_question;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| paper_id         | int(11)      | NO   | PRI | NULL    |       |
+| question_id      | bigint(20)   | NO   | PRI | NULL    |       |
+| sub_id           | bigint(20)   | NO   | PRI | NULL    |       |
+| total_num        | int(11)      | NO   |     | NULL    |       |
+| answer_num       | int(11)      | NO   |     | NULL    |       |
+| correct_num      | int(11)      | NO   |     | NULL    |       |
+| total_spend_time | int(11)      | NO   |     | NULL    |       |
+| total_score      | double       | NO   |     | NULL    |       |
+| choice_num       | varchar(128) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc stat_question;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| question_id      | bigint(20)   | NO   | PRI | NULL    |       |
+| sub_id           | bigint(20)   | NO   | PRI | NULL    |       |
+| total_num        | int(11)      | NO   |     | NULL    |       |
+| answer_num       | int(11)      | NO   |     | NULL    |       |
+| correct_num      | int(11)      | NO   |     | NULL    |       |
+| total_spend_time | int(11)      | NO   |     | NULL    |       |
+| total_score      | double       | NO   |     | NULL    |       |
+| choice_num       | varchar(128) | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc stat_report;
++-------------+-----------+------+-----+-------------------+-------+
+| Field       | Type      | Null | Key | Default           | Extra |
++-------------+-----------+------+-----+-------------------+-------+
+| paper_id    | int(11)   | NO   | PRI | NULL              |       |
+| employer_id | int(11)   | NO   | PRI | NULL              |       |
+| unreads     | int(11)   | NO   |     | NULL              |       |
+| report_date | timestamp | NO   |     | CURRENT_TIMESTAMP |       |
+| read_date   | timestamp | YES  |     | NULL              |       |
++-------------+-----------+------+-----+-------------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc stat_sets;
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| Field       | Type      | Null | Key | Default           | Extra                       |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| stat_type   | int(11)   | NO   | PRI | NULL              |                             |
+| start_num   | int(11)   | YES  |     | 0                 |                             |
+| stat_num    | int(11)   | YES  |     | 0                 |                             |
+| add_num     | int(11)   | YES  |     | 0                 |                             |
+| update_date | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+5 rows in set (0.00 sec)
+
+mysql> desc state_email_send;
++--------------+---------------+------+-----+-------------------+-------+
+| Field        | Type          | Null | Key | Default           | Extra |
++--------------+---------------+------+-----+-------------------+-------+
+| id           | bigint(20)    | NO   | PRI | NULL              |       |
+| email        | varchar(64)   | NO   | MUL | NULL              |       |
+| type         | int(1)        | NO   |     | NULL              |       |
+| subject      | varchar(255)  | NO   |     | NULL              |       |
+| content      | mediumtext    | NO   |     | NULL              |       |
+| state        | int(1)        | NO   | MUL | NULL              |       |
+| error_code   | int(11)       | NO   |     | NULL              |       |
+| error_detail | varchar(1023) | YES  |     | NULL              |       |
+| retries      | int(11)       | NO   |     | NULL              |       |
+| last_update  | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| callback     | varchar(16)   | YES  |     | NULL              |       |
+| smtp_type    | int(1)        | NO   |     | 0                 |       |
++--------------+---------------+------+-----+-------------------+-------+
+12 rows in set (0.00 sec)
+
+mysql> desc state_sms_send;
++--------------+--------------+------+-----+-------------------+-------+
+| Field        | Type         | Null | Key | Default           | Extra |
++--------------+--------------+------+-----+-------------------+-------+
+| id           | bigint(20)   | NO   | PRI | NULL              |       |
+| phone        | varchar(20)  | NO   |     | NULL              |       |
+| template_id  | varchar(32)  | NO   |     | NULL              |       |
+| content      | mediumtext   | NO   |     | NULL              |       |
+| state        | int(1)       | NO   |     | NULL              |       |
+| error_code   | int(11)      | NO   |     | NULL              |       |
+| error_detail | varchar(255) | YES  |     | NULL              |       |
+| last_update  | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| callback     | varchar(16)  | YES  |     | NULL              |       |
++--------------+--------------+------+-----+-------------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc state_stash;
++-------------+------------+------+-----+-------------------+-------+
+| Field       | Type       | Null | Key | Default           | Extra |
++-------------+------------+------+-----+-------------------+-------+
+| employer_id | int(11)    | NO   | PRI | NULL              |       |
+| stash_type  | int(11)    | NO   | PRI | NULL              |       |
+| content     | mediumtext | NO   |     | NULL              |       |
+| last_update | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+------------+------+-----+-------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc task;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| task_id     | int(11)      | NO   | PRI | NULL              |       |
+| task_type   | int(11)      | NO   | MUL | NULL              |       |
+| operator_id | int(11)      | YES  |     | NULL              |       |
+| state       | int(2)       | NO   | MUL | NULL              |       |
+| last_update | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| content     | mediumtext   | YES  |     | NULL              |       |
+| task_desc   | varchar(256) | YES  |     | NULL              |       |
++-------------+--------------+------+-----+-------------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc test;
++-----------------+--------------+------+-----+-------------------+-------+
+| Field           | Type         | Null | Key | Default           | Extra |
++-----------------+--------------+------+-----+-------------------+-------+
+| test_id         | bigint(20)   | NO   | PRI | NULL              |       |
+| candidate_id    | int(11)      | NO   | MUL | NULL              |       |
+| paper_id        | int(11)      | NO   | MUL | NULL              |       |
+| group_id        | int(11)      | NO   |     | NULL              |       |
+| clazz_ids       | varchar(512) | YES  |     | NULL              |       |
+| test_state      | tinyint(4)   | NO   | MUL | 0                 |       |
+| report_state    | tinyint(4)   | NO   |     | NULL              |       |
+| login_date      | timestamp    | YES  |     | CURRENT_TIMESTAMP |       |
+| begin_date      | timestamp    | YES  |     | CURRENT_TIMESTAMP |       |
+| end_date        | timestamp    | YES  |     | CURRENT_TIMESTAMP |       |
+| elapsed_time    | int(11)      | NO   |     | 0                 |       |
+| break_times     | int(11)      | NO   |     | 0                 |       |
+| switch_times    | int(11)      | NO   |     | 0                 |       |
+| track           | varchar(128) | YES  |     | NULL              |       |
+| client_ip       | varchar(256) | YES  |     | NULL              |       |
+| os              | varchar(30)  | YES  |     | NULL              |       |
+| browser         | varchar(20)  | YES  |     | NULL              |       |
+| browser_version | varchar(512) | YES  |     | NULL              |       |
+| visit_track     | varchar(64)  | YES  |     | NULL              |       |
+| employee_id     | int(11)      | YES  |     | NULL              |       |
+| reset_flag      | tinyint(4)   | NO   |     | NULL              |       |
+| purchase_id     | int(11)      | YES  | MUL | NULL              |       |
+| charged         | tinyint(4)   | NO   |     | 0                 |       |
+| varchar_ext1    | varchar(64)  | YES  |     | NULL              |       |
+| last_update     | timestamp    | YES  |     | NULL              |       |
+| varchar_ext2    | varchar(64)  | YES  |     | NULL              |       |
++-----------------+--------------+------+-----+-------------------+-------+
+26 rows in set (0.00 sec)
+
+mysql> desc test_error;
++----------------+-------------+------+-----+-------------------+-------+
+| Field          | Type        | Null | Key | Default           | Extra |
++----------------+-------------+------+-----+-------------------+-------+
+| error_id       | int(11)     | NO   | PRI | NULL              |       |
+| candidate_name | varchar(30) | YES  |     | NULL              |       |
+| candidate_uid  | varchar(64) | YES  |     | NULL              |       |
+| test_id        | bigint(20)  | NO   |     | NULL              |       |
+| question_id    | bigint(20)  | NO   |     | NULL              |       |
+| cause          | mediumtext  | YES  |     | NULL              |       |
+| create_date    | timestamp   | NO   |     | CURRENT_TIMESTAMP |       |
++----------------+-------------+------+-----+-------------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> desc test_feedback;
++-------------+---------------+------+-----+-------------------+-------+
+| Field       | Type          | Null | Key | Default           | Extra |
++-------------+---------------+------+-----+-------------------+-------+
+| test_id     | bigint(20)    | NO   | PRI | NULL              |       |
+| remark      | varchar(1000) | NO   |     | NULL              |       |
+| create_date | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
++-------------+---------------+------+-----+-------------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc test_info_ext;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| test_id      | bigint(20)   | NO   | PRI | NULL    |       |
+| info_id      | int(11)      | NO   | PRI | NULL    |       |
+| value        | varchar(255) | NO   |     | NULL    |       |
+| real_value   | varchar(255) | NO   |     | NULL    |       |
+| varchar_ext1 | varchar(64)  | YES  |     | NULL    |       |
+| varchar_ext2 | varchar(64)  | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc test_invitation;
++------------------------+--------------+------+-----+-------------------+-------+
+| Field                  | Type         | Null | Key | Default           | Extra |
++------------------------+--------------+------+-----+-------------------+-------+
+| invitation_id          | int(11)      | NO   | PRI | NULL              |       |
+| employer_id            | int(11)      | NO   | MUL | NULL              |       |
+| paper_id               | int(11)      | NO   | MUL | NULL              |       |
+| candidate_name         | varchar(30)  | NO   |     | NULL              |       |
+| candidate_uid          | varchar(64)  | NO   | MUL | NULL              |       |
+| origin_id              | int(11)      | NO   |     | 0                 |       |
+| eff_date               | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| exp_date               | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| param_content          | mediumtext   | YES  |     | NULL              |       |
+| ext_content            | mediumtext   | YES  |     | NULL              |       |
+| invitation_state       | tinyint(4)   | NO   |     | NULL              |       |
+| invitation_date        | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update            | timestamp    | NO   | MUL | CURRENT_TIMESTAMP |       |
+| valid                  | tinyint(4)   | NO   |     | NULL              |       |
+| sent_type              | tinyint(4)   | NO   |     | NULL              |       |
+| sent_id                | bigint(20)   | YES  | MUL | NULL              |       |
+| error_code             | int(3)       | NO   |     | NULL              |       |
+| sms_id                 | bigint(20)   | YES  | MUL | NULL              |       |
+| sms_code               | int(3)       | YES  |     | NULL              |       |
+| employee_id            | int(11)      | YES  |     | NULL              |       |
+| test_report_state      | int(11)      | YES  |     | 0                 |       |
+| invitation_result      | varchar(128) | YES  |     | NULL              |       |
+| department             | varchar(64)  | YES  |     | NULL              |       |
+| city                   | varchar(64)  | YES  |     | NULL              |       |
+| busi_reg_province_code | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_city_code     | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_county_code   | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_area_code     | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_code          | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_province_name | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_city_name     | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_county_name   | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_area_name     | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_name          | varchar(32)  | YES  |     | NULL              |       |
+| busi_reg_level         | varchar(32)  | YES  |     | NULL              |       |
++------------------------+--------------+------+-----+-------------------+-------+
+35 rows in set (0.00 sec)
+
+mysql> desc test_monitor;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| test_id     | bigint(20)   | NO   | PRI | NULL              |       |
+| pic_url     | varchar(255) | NO   | PRI | NULL              |       |
+| create_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
+| faces       | int(11)      | YES  |     | NULL              |       |
++-------------+--------------+------+-----+-------------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc test_part;
++--------------+--------------+------+-----+-------------------+-------+
+| Field        | Type         | Null | Key | Default           | Extra |
++--------------+--------------+------+-----+-------------------+-------+
+| test_id      | bigint(20)   | NO   | PRI | NULL              |       |
+| part_seq     | tinyint(4)   | NO   | PRI | NULL              |       |
+| part_name    | varchar(255) | NO   |     | NULL              |       |
+| question_num | int(11)      | NO   |     | NULL              |       |
+| part_time    | int(11)      | YES  |     | NULL              |       |
+| part_points  | double       | YES  |     | NULL              |       |
+| begin_date   | timestamp    | YES  |     | CURRENT_TIMESTAMP |       |
+| end_date     | timestamp    | YES  |     | CURRENT_TIMESTAMP |       |
+| elapsed_time | int(11)      | NO   |     | 0                 |       |
+| varchar_ext1 | varchar(64)  | YES  |     | NULL              |       |
+| varchar_ext2 | varchar(64)  | YES  |     | NULL              |       |
++--------------+--------------+------+-----+-------------------+-------+
+11 rows in set (0.00 sec)
+
+mysql> desc test_program;
++-----------------+------------+------+-----+---------+-------+
+| Field           | Type       | Null | Key | Default | Extra |
++-----------------+------------+------+-----+---------+-------+
+| test_id         | bigint(20) | NO   | PRI | NULL    |       |
+| question_id     | bigint(20) | NO   | PRI | NULL    |       |
+| score           | double     | NO   |     | NULL    |       |
+| refer_elapsed   | bigint(20) | NO   |     | NULL    |       |
+| refer_mem_bytes | bigint(20) | NO   |     | NULL    |       |
+| cand_elapsed    | bigint(20) | NO   |     | 0       |       |
+| cand_mem_bytes  | bigint(20) | NO   |     | NULL    |       |
+| group_id        | int(11)    | NO   | PRI | NULL    |       |
+| case_id         | int(11)    | NO   | PRI | NULL    |       |
++-----------------+------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql> desc test_question;
++----------------+---------------+------+-----+-------------------+-------+
+| Field          | Type          | Null | Key | Default           | Extra |
++----------------+---------------+------+-----+-------------------+-------+
+| test_id        | bigint(20)    | NO   | PRI | NULL              |       |
+| part_seq       | tinyint(4)    | NO   |     | NULL              |       |
+| question_id    | bigint(20)    | NO   | PRI | NULL              |       |
+| sub_id         | bigint(20)    | NO   | PRI | 0                 |       |
+| question_seq   | smallint(6)   | NO   |     | NULL              |       |
+| answered       | tinyint(4)    | NO   |     | 0                 |       |
+| correct        | tinyint(4)    | NO   |     | NULL              |       |
+| point          | double        | NO   |     | NULL              |       |
+| score          | double        | YES  |     | NULL              |       |
+| difficulty     | tinyint(4)    | NO   |     | 0                 |       |
+| skill_id       | varchar(13)   | YES  |     | NULL              |       |
+| answer_time    | int(11)       | YES  |     | NULL              |       |
+| begin_date     | timestamp     | YES  |     | CURRENT_TIMESTAMP |       |
+| end_date       | timestamp     | YES  |     | CURRENT_TIMESTAMP |       |
+| content        | varchar(512)  | YES  |     | NULL              |       |
+| answer         | mediumtext    | YES  |     | NULL              |       |
+| remark         | varchar(256)  | YES  |     | NULL              |       |
+| answer_explain | varchar(1024) | YES  |     | NULL              |       |
+| debug_times    | smallint(6)   | YES  |     | NULL              |       |
+| p_month        | int(11)       | YES  |     | 201607            |       |
+| varchar_ext1   | varchar(64)   | YES  |     | NULL              |       |
+| varchar_ext2   | varchar(64)   | YES  |     | NULL              |       |
++----------------+---------------+------+-----+-------------------+-------+
+22 rows in set (0.00 sec)
+
+mysql> desc test_question_ext;
++-------------+--------------+------+-----+-------------------+-------+
+| Field       | Type         | Null | Key | Default           | Extra |
++-------------+--------------+------+-----+-------------------+-------+
+| test_id     | bigint(20)   | NO   | PRI | NULL              |       |
+| question_id | bigint(20)   | NO   | PRI | NULL              |       |
+| sub_id      | bigint(20)   | NO   | PRI | 0                 |       |
+| play_times  | varchar(512) | YES  |     | NULL              |       |
+| create_date | timestamp    | YES  |     | CURRENT_TIMESTAMP |       |
+| last_update | timestamp    | YES  |     | CURRENT_TIMESTAMP |       |
++-------------+--------------+------+-----+-------------------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc test_report;
++------------------------+---------------+------+-----+-------------------+-------+
+| Field                  | Type          | Null | Key | Default           | Extra |
++------------------------+---------------+------+-----+-------------------+-------+
+| test_id                | bigint(20)    | NO   | PRI | NULL              |       |
+| paper_id               | int(11)       | NO   |     | NULL              |       |
+| candidate_id           | int(11)       | NO   |     | NULL              |       |
+| candidate_name         | varchar(30)   | NO   |     | NULL              |       |
+| candidate_uid          | varchar(64)   | NO   |     | NULL              |       |
+| candidate_phone        | varchar(20)   | YES  |     | NULL              |       |
+| employer_id            | int(11)       | NO   |     | NULL              |       |
+| report_state           | tinyint(4)    | NO   |     | NULL              |       |
+| report_date            | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| last_update            | timestamp     | NO   | MUL | CURRENT_TIMESTAMP |       |
+| score                  | double        | NO   |     | NULL              |       |
+| content                | mediumtext    | NO   |     | NULL              |       |
+| tags                   | mediumtext    | YES  |     | NULL              |       |
+| remark                 | varchar(2048) | YES  |     | NULL              |       |
+| unscored               | int(11)       | NO   |     | 0                 |       |
+| praise_num             | int(11)       | YES  |     | 0                 |       |
+| varchar_ext1           | varchar(64)   | YES  |     | NULL              |       |
+| varchar_ext2           | varchar(64)   | YES  |     | NULL              |       |
+| busi_reg_province_code | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_city_code     | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_county_code   | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_area_code     | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_code          | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_province_name | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_city_name     | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_county_name   | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_area_name     | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_name          | varchar(32)   | YES  |     | NULL              |       |
+| busi_reg_level         | varchar(32)   | YES  |     | NULL              |       |
++------------------------+---------------+------+-----+-------------------+-------+
+29 rows in set (0.00 sec)
+
+mysql> desc test_report_praise;
++-------------+------------+------+-----+---------+-------+
+| Field       | Type       | Null | Key | Default | Extra |
++-------------+------------+------+-----+---------+-------+
+| test_id     | bigint(20) | NO   | PRI | NULL    |       |
+| employer_id | int(11)    | NO   | PRI | NULL    |       |
+| create_date | int(11)    | NO   |     | NULL    |       |
++-------------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc test_switch;
++-----------------+------------+------+-----+-------------------+-------+
+| Field           | Type       | Null | Key | Default           | Extra |
++-----------------+------------+------+-----+-------------------+-------+
+| switch_id       | int(11)    | NO   | PRI | NULL              |       |
+| test_id         | bigint(20) | NO   | MUL | NULL              |       |
+| part_seq        | tinyint(4) | YES  |     | NULL              |       |
+| question_id     | bigint(20) | YES  |     | NULL              |       |
+| elapsed_seconds | int(11)    | YES  |     | NULL              |       |
+| switch_time     | timestamp  | NO   |     | CURRENT_TIMESTAMP |       |
++-----------------+------------+------+-----+-------------------+-------+
+6 rows in set (0.00 sec)
