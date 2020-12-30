@@ -1,4 +1,4 @@
-package top.duanhong.steward.controller;
+package top.duanhong.steward.controller.grid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

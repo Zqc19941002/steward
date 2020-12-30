@@ -1,4 +1,4 @@
-package top.duanhong.steward.controller;
+package top.duanhong.steward.controller.sys;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

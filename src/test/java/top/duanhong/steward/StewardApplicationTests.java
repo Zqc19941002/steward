@@ -9,9 +9,11 @@ import top.duanhong.steward.entity.bo.FileDocument;
 import top.duanhong.steward.entity.po.NetTag;
 import top.duanhong.steward.request.*;
 import top.duanhong.steward.service.*;
+import top.duanhong.steward.service.qiniu.QINiuFileService;
 import top.duanhong.steward.utils.MethodExcuResult;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -34,6 +36,9 @@ public class StewardApplicationTests {
     private FileTypeService fileTypeService;
 
     @Autowired FileService fileService;
+
+    @Autowired
+    private QINiuFileService qiNiuFileService;
 
     @Test
     public void contextLoads() {
@@ -142,6 +147,11 @@ public class StewardApplicationTests {
         req1.setFileTypeId("sft6");
         req1.setUserId("duanhong");
         fileService.getAllFileListByType(req1);
+    }
+
+    @Test
+    public void uploadQiniuFile(){
+        qiNiuFileService.uploadQiNiuFile(new File("E:\\资料\\简历\\简历-北京.pdf"));
     }
 
 }

@@ -1,4 +1,4 @@
-package top.duanhong.steward.controller;
+package top.duanhong.steward.controller.note;
 
 /**
  * @author duanhong

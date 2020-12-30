@@ -3,15 +3,15 @@ package top.duanhong.steward.utils;
 import com.qiniu.util.Auth;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 public class QiNiuUtil {
-
 
     public static final String SECRET_KEY = "5DsX2S7MMFaDcoV27TwfPmB9Rh0Uo26utVzTeeg_";
     public static final String ACCESS_KEY = "wSev1gzynuXgxcEYMfGcsli2c4R9hKbErgs0s-7Z";
     public static final String QI_NIU_FILE_URL = "https://img.october2.top/";
     public static final long EXPIRES = 3600;
+    public static final String BUCKET_NAME="duanhong-bucket";
+    public static final Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 
     /**
      * 获取七牛文件访问token
@@ -58,8 +58,18 @@ public class QiNiuUtil {
         return downloadUrl;
     }
 
+    /**
+     * 获取上传token
+     * @return
+     */
+    public static String getUploadToken(){
+        Auth auth=Auth.create(ACCESS_KEY, SECRET_KEY);
+        return auth.uploadToken(BUCKET_NAME);
+    }
+
     public static void main(String[] args) {
-        String url = QiNiuUtil.getDownloadUrl("1001234.jpg", false);
+        String url = QiNiuUtil.getDownloadUrl("asdfasfaeradf1609297987615", false);
+//        String url=getUploadToken(new HashMap<>());
         System.out.println(url);
     }
 }

@@ -22,6 +22,7 @@ public class SequenceEnum implements Serializable {
     public static final String STEW_FILE_SEQ="STEW_FILE_SEQ";
     public static final String STEW_FILE_TYPE_SEQ="STEW_FILE_TYPE_SEQ";
     public static final String STEW_MENU_SEQ="STEW_MENU_SEQ";
+    public static final String QI_NIU_FILE_SEQ="QI_NIU_FILE_SEQ";
 
     /**
      * 序列前缀集合
@@ -40,6 +41,7 @@ public class SequenceEnum implements Serializable {
             put(STEW_FILE_SEQ,"sf");
             put(STEW_FILE_TYPE_SEQ,"sft");
             put(STEW_MENU_SEQ,"menu_");
+            put(QI_NIU_FILE_SEQ,"qiniu_file_");
         }
     };
 
@@ -60,6 +62,7 @@ public class SequenceEnum implements Serializable {
             put(STEW_FILE_SEQ,"100000000");
             put(STEW_FILE_TYPE_SEQ,"100000000");
             put(STEW_MENU_SEQ,"10");
+            put(QI_NIU_FILE_SEQ,"1000000");
         }
     };
 
