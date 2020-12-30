@@ -19,10 +19,11 @@ public class QiNiuUtil {
      * @param fileKey
      * @return
      */
-    public static String getDownloadToken(String fileKey) {
+    public static String[] getDownloadToken(String fileKey) {
+        String[] tokenArray = new String[2];
         String downloadUrl = QI_NIU_FILE_URL;
         downloadUrl = downloadUrl + fileKey;
-        String unixCurrentTimeMillis = Long.toString(System.currentTimeMillis() / 1000L);
+        String unixCurrentTimeMillis = Long.toString(System.currentTimeMillis() / 1000L + EXPIRES);
         downloadUrl = downloadUrl + "?" + "e=" + unixCurrentTimeMillis;
         String token = "";
         try {
@@ -34,7 +35,9 @@ public class QiNiuUtil {
             e.printStackTrace();
             log.error("hmac_sha1编码异常");
         }
-        return ACCESS_KEY + ":" + token;
+        tokenArray[0] = ACCESS_KEY + ":" + token;
+        tokenArray[1] = unixCurrentTimeMillis;
+        return tokenArray;
     }
 
     /**
@@ -49,15 +52,14 @@ public class QiNiuUtil {
         if (useQiNiu) {
             return Auth.create(ACCESS_KEY, SECRET_KEY).privateDownloadUrl(QI_NIU_FILE_URL + fileKey);
         }
-        String token = QiNiuUtil.getDownloadToken(fileKey);
+        String token[] = QiNiuUtil.getDownloadToken(fileKey);
         String downloadUrl = QI_NIU_FILE_URL + fileKey;
-        String unixCurrentTimeMillis = Long.toString(System.currentTimeMillis() / 1000L + EXPIRES);
-        downloadUrl = downloadUrl + "?" + "e=" + unixCurrentTimeMillis + "&token=" + token;
+        downloadUrl = downloadUrl + "?" + "e=" + token[1] + "&token=" + token[0];
         return downloadUrl;
     }
 
     public static void main(String[] args) {
-        String url = QiNiuUtil.getDownloadUrl("Fr4FSgy1uAbt9c1gbhGuCITu-7gg", true);
+        String url = QiNiuUtil.getDownloadUrl("1001234.jpg", false);
         System.out.println(url);
     }
 }
