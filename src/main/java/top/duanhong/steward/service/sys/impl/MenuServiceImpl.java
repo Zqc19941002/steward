@@ -12,7 +12,6 @@ import top.duanhong.steward.entity.po.StewMenuExample;
 import top.duanhong.steward.enumeration.SequenceEnum;
 import top.duanhong.steward.mapper.gmapper.StewMenuMapper;
 import top.duanhong.steward.response.MethodExecuteResult;
-import top.duanhong.steward.service.RedisSequenceService;
 import top.duanhong.steward.service.sys.MenuService;
 import top.duanhong.steward.utils.TreeMenuUtil;
 

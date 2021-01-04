@@ -15,6 +15,7 @@ import top.duanhong.steward.mapper.gmapper.FileTypeUserMapper;
 import top.duanhong.steward.request.AddFileTypeReq;
 import top.duanhong.steward.request.DeleteFileTypeReq;
 import top.duanhong.steward.request.QueryFileTypesReq;
+import top.duanhong.steward.service.sys.impl.RedisSequenceService;
 import top.duanhong.steward.utils.MethodExcuResult;
 
 import javax.annotation.Resource;

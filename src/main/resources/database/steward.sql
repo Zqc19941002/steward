@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 断鸿
+ Source Server         : 家里的数据库
  Source Server Type    : MySQL
- Source Server Version : 80019
- Source Host           : 119.23.21.152:3306
+ Source Server Version : 80013
+ Source Host           : 192.168.0.111:3306
  Source Schema         : steward
 
  Target Server Type    : MySQL
- Target Server Version : 80019
+ Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 27/02/2020 11:23:26
+ Date: 04/01/2021 16:12:46
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `hibernate_sequence`;
 CREATE TABLE `hibernate_sequence`  (
-  `next_val` bigint(0) NULL DEFAULT NULL
+  `next_val` bigint(20) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -44,7 +44,7 @@ INSERT INTO `hibernate_sequence` VALUES (1);
 -- ----------------------------
 DROP TABLE IF EXISTS `mgmt_rival_chl_base`;
 CREATE TABLE `mgmt_rival_chl_base`  (
-  `channel_id` bigint(0) NOT NULL,
+  `channel_id` bigint(20) NOT NULL,
   `adm_reg_city_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `adm_reg_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `adm_reg_county_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -52,8 +52,8 @@ CREATE TABLE `mgmt_rival_chl_base`  (
   `adm_reg_province_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `adm_reg_town_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `adm_reg_village_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `belong_zyst_chl_id` bigint(0) NULL DEFAULT NULL,
-  `bind_manager_flag` int(0) NULL DEFAULT NULL,
+  `belong_zyst_chl_id` bigint(20) NULL DEFAULT NULL,
+  `bind_manager_flag` int(11) NULL DEFAULT NULL,
   `busi_circle_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `busi_circle_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `busi_reg_area_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -91,8 +91,8 @@ CREATE TABLE `mgmt_rival_chl_base`  (
   `contact_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `contact_postcode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `contact_sex` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `contract_bond` bigint(0) NULL DEFAULT NULL,
-  `core_flag` int(0) NULL DEFAULT NULL,
+  `contract_bond` bigint(20) NULL DEFAULT NULL,
+  `core_flag` int(11) NULL DEFAULT NULL,
   `create_oper_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `dept_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE `mgmt_rival_chl_base`  (
   `longitude` decimal(19, 2) NULL DEFAULT NULL,
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `shop_area` decimal(19, 2) NULL DEFAULT NULL,
-  `state` int(0) NULL DEFAULT NULL,
+  `state` int(11) NULL DEFAULT NULL,
   `telecom_operator_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `update_oper_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
@@ -1021,6 +1021,11 @@ CREATE TABLE `stew_dict`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of stew_dict
+-- ----------------------------
+INSERT INTO `stew_dict` VALUES ('d1', '2020-12-20 16:14:27', '2', '橘子', '2020-12-20 16:14:27');
+
+-- ----------------------------
 -- Table structure for stew_file
 -- ----------------------------
 DROP TABLE IF EXISTS `stew_file`;
@@ -1029,7 +1034,7 @@ CREATE TABLE `stew_file`  (
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `file_mongo_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `file_num` int(0) NULL DEFAULT NULL,
+  `file_num` int(11) NULL DEFAULT NULL,
   `file_type_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `parent_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -1040,6 +1045,11 @@ CREATE TABLE `stew_file`  (
   `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`file_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of stew_file
+-- ----------------------------
+INSERT INTO `stew_file` VALUES ('sf1', 'nmcdvknsdfnvsdnvis;fvn', '2020-12-20 16:14:27', NULL, NULL, 'sft6', '测试你大爷7', 'sf4', '测试文件', '1', 'file', '2020-12-20 16:14:27', 'duanhong');
 
 -- ----------------------------
 -- Table structure for stew_file_type
@@ -1059,7 +1069,7 @@ CREATE TABLE `stew_file_type`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `stew_file_type_user`;
 CREATE TABLE `stew_file_type_user`  (
-  `id` bigint(0) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `file_type_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -1128,21 +1138,45 @@ INSERT INTO `stew_grid` VALUES ('1582539953963', NULL, NULL, NULL, NULL, NULL, '
 INSERT INTO `stew_grid` VALUES ('1582539959175', NULL, NULL, NULL, NULL, NULL, '', '36.790503', '101.726954', '36.799751', '101.716606', '', '36.790503', '101.716606', '36.799751', '101.726954');
 INSERT INTO `stew_grid` VALUES ('1582539967246', NULL, NULL, NULL, NULL, NULL, '', '36.811771', '101.749951', '36.820092', '101.739603', '', '36.811771', '101.739603', '36.820092', '101.749951');
 INSERT INTO `stew_grid` VALUES ('1582539972459', NULL, NULL, NULL, NULL, NULL, '', '36.822865', '101.791345', '36.832109', '101.780997', '', '36.822865', '101.780997', '36.832109', '101.791345');
+INSERT INTO `stew_grid` VALUES ('1607518825644', NULL, NULL, NULL, NULL, NULL, '', '36.721571', '101.812042', '36.721571', '101.812042', '', '36.721571', '101.812042', '36.721571', '101.812042');
+INSERT INTO `stew_grid` VALUES ('1607518825930', NULL, NULL, NULL, NULL, NULL, '', '36.696573', '101.906328', '36.696573', '101.906328', '', '36.696573', '101.906328', '36.696573', '101.906328');
+INSERT INTO `stew_grid` VALUES ('1607518826215', NULL, NULL, NULL, NULL, NULL, '', '36.595574', '101.855736', '36.595574', '101.855736', '', '36.595574', '101.855736', '36.595574', '101.855736');
 
 -- ----------------------------
 -- Table structure for stew_menus
 -- ----------------------------
 DROP TABLE IF EXISTS `stew_menus`;
 CREATE TABLE `stew_menus`  (
-  `menu_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `create_time` datetime(0) NULL DEFAULT NULL,
-  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `menu_key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `parent_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`menu_id`) USING BTREE
+  `id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `create_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `create_date` datetime(0) NULL DEFAULT NULL,
+  `menu_key` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `parent_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `target` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `update_date` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of stew_menus
+-- ----------------------------
+INSERT INTO `stew_menus` VALUES ('1', 'duanhong', '2020-12-11 21:37:29', 'Home', 'iconfont stew-shouye', '0', '首页菜单', NULL, '首页', '2020-12-11 21:38:16');
+INSERT INTO `stew_menus` VALUES ('3', 'duanhong', '2020-12-11 21:40:39', 'tools', 'iconfont stew-changyongshili', '0', '常用工具菜单', NULL, '常用工具', '2020-12-11 21:41:09');
+INSERT INTO `stew_menus` VALUES ('4', 'duanhong', '2020-12-11 21:41:19', 'NetTag', 'iconfont stew-biaoqian', '3', '常用标签菜单', NULL, '常用标签', '2020-12-11 21:41:38');
+INSERT INTO `stew_menus` VALUES ('menu_1', 'duanhong', '2020-12-14 06:02:43', 'sdsfdsdfs', '', '3', 'sdfsfsf', NULL, '菜单测试', '2020-12-14 06:02:43');
+INSERT INTO `stew_menus` VALUES ('menu_10', 'duanhong', '2020-12-20 13:05:30', '34534534535', '', 'menu_1', '', NULL, '3453453', '2020-12-20 13:05:30');
+INSERT INTO `stew_menus` VALUES ('menu_11', 'duanhong', '2020-12-20 13:13:58', '23424', '', '4', '', NULL, '234234', '2020-12-20 13:13:58');
+INSERT INTO `stew_menus` VALUES ('menu_12', 'duanhong', '2020-12-20 13:15:22', '234234234234', '', '4', '', NULL, '2342344', '2020-12-20 13:15:22');
+INSERT INTO `stew_menus` VALUES ('menu_13', 'duanhong', '2020-12-20 13:16:16', '23424324', '', 'menu_1', '', NULL, '2342342', '2020-12-20 13:16:16');
+INSERT INTO `stew_menus` VALUES ('menu_14', 'duanhong', '2020-12-20 13:16:37', '423423423', '', '4', '', NULL, '323423423', '2020-12-20 13:16:37');
+INSERT INTO `stew_menus` VALUES ('menu_16', 'duanhong', '2020-12-20 13:19:37', '234234234', '', 'menu_15', '', NULL, '234234234', '2020-12-20 13:19:37');
+INSERT INTO `stew_menus` VALUES ('menu_17', 'duanhong', '2020-12-20 13:20:02', '123123132', '', 'menu_16', '', NULL, '21312', '2020-12-20 13:20:02');
+INSERT INTO `stew_menus` VALUES ('menu_2', 'duanhong', '2020-12-14 06:03:05', 'sdsfdsdfs', '', '3', 'sdfsfsf', NULL, '菜单测试', '2020-12-14 06:03:05');
+INSERT INTO `stew_menus` VALUES ('menu_8', 'duanhong', '2020-12-20 12:57:06', '24324', '', 'menu_2', '', NULL, '234242', '2020-12-20 12:57:06');
+INSERT INTO `stew_menus` VALUES ('menu_9', 'duanhong', '2020-12-20 12:58:39', 'asdfasdfasdf', '', 'menu_2', '', NULL, 'asdasd', '2020-12-20 12:58:39');
 
 -- ----------------------------
 -- Table structure for stew_message
@@ -1153,10 +1187,29 @@ CREATE TABLE `stew_message`  (
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `status` int(0) NULL DEFAULT NULL,
+  `status` int(11) NULL DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`mess_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of stew_message
+-- ----------------------------
+INSERT INTO `stew_message` VALUES ('m1', 'nkasdnviaheoivrnaldfnvolandfovjadlf', '2020-12-20 16:14:27', '下雨就下雨呗', 0, '明天下雨', '2020-12-20 16:14:27');
+
+-- ----------------------------
+-- Table structure for stew_net_tag_group
+-- ----------------------------
+DROP TABLE IF EXISTS `stew_net_tag_group`;
+CREATE TABLE `stew_net_tag_group`  (
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `create_time` datetime(0) NULL DEFAULT NULL,
+  `update_time` datetime(0) NULL DEFAULT NULL,
+  `remark` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `create_user_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`group_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -1166,21 +1219,35 @@ DROP TABLE IF EXISTS `stew_net_tags`;
 CREATE TABLE `stew_net_tags`  (
   `tag_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
-  `tag_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `tag_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   `tag_path` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `tag_remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `update_time` datetime(0) NULL DEFAULT NULL,
+  `tag_remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
+  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  `state` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1',
   PRIMARY KEY (`tag_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of stew_net_tags
 -- ----------------------------
-INSERT INTO `stew_net_tags` VALUES ('n0', '2020-02-07 03:57:42', '百度地图绘制工具', 'https://blog.csdn.net/fuwei736349065/article/details/75597574', 'fsdfsfafafaf', NULL, NULL, '2020-02-07 03:57:42');
-INSERT INTO `stew_net_tags` VALUES ('n01', '2020-02-07 04:30:30', 'elementui', 'https://element.eleme.cn/#/zh-CN/component/icon', 'https://element.eleme.cn/#/zh-CN/component/icon', NULL, NULL, '2020-02-07 04:30:30');
-INSERT INTO `stew_net_tags` VALUES ('n7', '2020-02-23 17:16:41', 'emims-华为', 'http://139.9.135.26:8088/emims/', 'emims-华为-http://139.9.135.26:8088/emims/', NULL, NULL, '2020-02-23 17:16:41');
+INSERT INTO `stew_net_tags` VALUES ('n0', '2020-02-07 03:57:42', '百度地图绘制工具', 'https://blog.csdn.net/fuwei736349065/article/details/75597574', 'fsdfsfafafaf345353', NULL, NULL, '2020-12-13 09:17:44', '1');
+INSERT INTO `stew_net_tags` VALUES ('n01', '2020-02-07 04:30:30', 'elementui', 'https://element.eleme.cn/#/zh-CN/component/icon', 'https://element.eleme.cn/#/zh-CN/component/icon', NULL, NULL, '2020-12-09 20:56:14', '1');
+INSERT INTO `stew_net_tags` VALUES ('n1', '2020-12-09 12:58:49', '华为备案网址', 'https://console.huaweicloud.com/beian/?region=cn-north-4#/', '华为备案地址哈哈哈哈哈哈', '', '', '2020-12-09 12:58:49', '1');
+INSERT INTO `stew_net_tags` VALUES ('n10', '2020-12-13 07:03:01', '学信网', 'https://www.chsi.com.cn/', '', '', '', '2020-12-13 07:03:01', '1');
+INSERT INTO `stew_net_tags` VALUES ('n11', '2020-12-13 07:17:58', 'iconfont', 'https://www.iconfont.cn/manage/index?manage_type=myprojects&projectId=1948241', '', '', '', '2020-12-13 07:17:58', '1');
+INSERT INTO `stew_net_tags` VALUES ('n12', '2020-12-20 16:38:28', '助学贷款-国家开发银行', 'https://sls.cdb.com.cn/#/', '', '', '', '2020-12-20 16:38:28', '1');
+INSERT INTO `stew_net_tags` VALUES ('n13', '2020-12-20 16:39:54', '华为云服务器控制台', 'https://console.huaweicloud.com/ecm/?agencyId=078744a2ad0010001fc6c01d23909261&region=cn-north-4&locale=zh-cn#/evs/manager/volumelist', '', '', '', '2020-12-20 16:39:54', '1');
+INSERT INTO `stew_net_tags` VALUES ('n14', '2020-12-20 16:40:29', '亚信科技OA系统', 'http://xin.asiainfo.com/zh/', '', '', '', '2020-12-20 16:40:54', '1');
+INSERT INTO `stew_net_tags` VALUES ('n2', '2020-12-09 12:59:25', 'nacos网址', 'http://192.168.0.111:8848/nacos/index.html#/configurationManagement?dataId=&group=&appName=&namespace=', 'nacos网址哈哈哈哈哈', '', '', '2020-12-09 12:59:25', '1');
+INSERT INTO `stew_net_tags` VALUES ('n3', '2020-12-09 13:00:00', 'eureka注册中心地址', 'http://192.168.0.111:8763', 'eureka注册中心地址爱的范围分为非', '', '', '2021-01-01 10:13:13', '1');
+INSERT INTO `stew_net_tags` VALUES ('n4', '2020-12-10 00:54:20', 'heyui使用文档', 'https://www.heyui.top/component/', 'https://www.heyui.top/component/', '', '', '2020-12-10 00:54:20', '1');
+INSERT INTO `stew_net_tags` VALUES ('n5', '2020-12-13 06:58:42', 'ssl证书', 'https://freessl.cn/orderlist', 'https://freessl.cn/orderlist', '', '', '2020-12-13 06:58:42', '1');
+INSERT INTO `stew_net_tags` VALUES ('n6', '2020-12-13 06:59:19', 'certCloud', 'https://certcloud.cn/cert/orders/d2zDavvQ', 'https://certcloud.cn/cert/orders/d2zDavvQ', '', '', '2020-12-13 06:59:19', '1');
+INSERT INTO `stew_net_tags` VALUES ('n7', '2020-02-23 17:16:41', 'emims-华为', 'http://139.9.135.26:8088/emims/', 'emims-华为-http://139.9.135.26:8088/emims/', NULL, NULL, '2020-12-09 20:56:15', '1');
+INSERT INTO `stew_net_tags` VALUES ('n8', '2020-12-13 07:01:13', 'qq邮箱', 'https://mail.qq.com/cgi-bin/frame_html?sid=JO6riyaGnew5Fixz&r=4dcb846c6f44c962fd5d53527520d4d1', '', '', '', '2020-12-13 07:01:13', '1');
+INSERT INTO `stew_net_tags` VALUES ('n9', '2020-12-13 07:02:31', '163邮箱', 'https://email.163.com/#module=read.ReadModule%7C%7B%22area%22%3A%22normal%22%2C%22isThread%22%3Afalse%2C%22viewType%22%3A%22%22%2C%22id%22%3A%22164%3A1tbipA-yqVr7rvNe3gAAsM%22%2C%22fid%22%3A1%7D', '', '', '', '2020-12-13 07:02:31', '1');
 
 -- ----------------------------
 -- Table structure for stew_notes

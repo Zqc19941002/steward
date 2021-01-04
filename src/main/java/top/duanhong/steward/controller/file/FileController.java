@@ -10,7 +10,7 @@ import top.duanhong.steward.request.*;
 import top.duanhong.steward.response.SysBaseResponse;
 import top.duanhong.steward.service.FileService;
 import top.duanhong.steward.service.FileTypeService;
-import top.duanhong.steward.service.RedisSequenceService;
+import top.duanhong.steward.service.sys.impl.RedisSequenceService;
 import top.duanhong.steward.utils.MethodExcuResult;
 import top.duanhong.steward.utils.ResponseUtil;
 

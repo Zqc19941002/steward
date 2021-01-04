@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import top.duanhong.steward.request.InsertMessageReq;
 import top.duanhong.steward.request.QueryMessageReq;
 import top.duanhong.steward.response.SysBaseResponse;
-import top.duanhong.steward.service.MessageService;
+import top.duanhong.steward.service.sys.impl.MessageService;
 import top.duanhong.steward.utils.MethodExcuResult;
 import top.duanhong.steward.utils.ResponseUtil;
 

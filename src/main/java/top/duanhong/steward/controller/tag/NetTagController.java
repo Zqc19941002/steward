@@ -7,10 +7,13 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import top.duanhong.steward.constants.NetTagStateConstant;
+import top.duanhong.steward.controller.tag.param.CommonNetTagReq;
+import top.duanhong.steward.controller.tag.param.FlagAsCommonNetTagReq;
 import top.duanhong.steward.enumeration.StatusCodeEnum;
 import top.duanhong.steward.request.*;
 import top.duanhong.steward.response.SysBaseResponse;
-import top.duanhong.steward.service.NetTabService;
+import top.duanhong.steward.service.tag.NetTabService;
 import top.duanhong.steward.utils.FileUtil;
 import top.duanhong.steward.utils.MethodExcuResult;
 import top.duanhong.steward.utils.ResponseUtil;
@@ -100,6 +103,41 @@ public class NetTagController {
             return ResponseUtil.getFailedRes("0001","参数校验失败");
         }
         MethodExcuResult result=netTabService.updateNetTags(req);
+        if (result.isSuccess()){
+            return ResponseUtil.getSuccessRes(result.getResult());
+        }else {
+            return ResponseUtil.getFailedRes(result.getCode(),result.getMess());
+        }
+    }
+
+    /**
+     * 查询常用标签
+     * @param commonNetTagReq
+     * @return
+     */
+    @GetMapping("/getCommonNetTag")
+    public SysBaseResponse getCommonNetTag(CommonNetTagReq commonNetTagReq){
+        MethodExcuResult result=netTabService.getCommonNetTags(commonNetTagReq);
+        if (result.isSuccess()){
+            return ResponseUtil.getSuccessRes(result.getResult());
+        }else {
+            return ResponseUtil.getFailedRes(result.getCode(),result.getMess());
+        }
+    }
+
+    /**
+     * 标记标签为常用或者取消常用
+     * @param flagAsCommonNetTagReq
+     * @param bindingResult
+     * @return
+     */
+    @PutMapping("/flagAsCommonNetTag")
+    public SysBaseResponse flagAsCommonNetTag(@RequestBody @Valid FlagAsCommonNetTagReq flagAsCommonNetTagReq,BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            log.error("更新网络标签时错误");
+            return ResponseUtil.getFailedRes("0001","参数校验失败");
+        }
+        MethodExcuResult result=netTabService.flagAsCommonNetTag(flagAsCommonNetTagReq);
         if (result.isSuccess()){
             return ResponseUtil.getSuccessRes(result.getResult());
         }else {

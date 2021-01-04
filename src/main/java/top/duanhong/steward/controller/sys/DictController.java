@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import top.duanhong.steward.request.DictAddReq;
 import top.duanhong.steward.request.QueryDictReq;
 import top.duanhong.steward.response.SysBaseResponse;
-import top.duanhong.steward.service.DictService;
+import top.duanhong.steward.service.sys.impl.DictService;
 import top.duanhong.steward.utils.MethodExcuResult;
 import top.duanhong.steward.utils.ResponseUtil;
 

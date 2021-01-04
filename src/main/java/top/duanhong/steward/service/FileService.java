@@ -10,9 +10,11 @@ import top.duanhong.steward.mapper.gmapper.StewFileMapper;
 import top.duanhong.steward.request.FileAddReq;
 import top.duanhong.steward.request.FileSelectReq;
 import top.duanhong.steward.request.RenameFileReq;
+import top.duanhong.steward.service.sys.impl.RedisSequenceService;
 import top.duanhong.steward.utils.TreeDataUtils;
 import top.duanhong.steward.utils.MethodExcuResult;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class FileService {
     @Autowired
     private FileTypeService fileTypeService;
 
-    @Autowired
+    @Resource
     private StewFileMapper stewFileMapper;
 
     /**

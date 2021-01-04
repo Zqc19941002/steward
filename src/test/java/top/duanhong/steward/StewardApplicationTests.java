@@ -9,7 +9,10 @@ import top.duanhong.steward.entity.bo.FileDocument;
 import top.duanhong.steward.entity.po.NetTag;
 import top.duanhong.steward.request.*;
 import top.duanhong.steward.service.*;
-import top.duanhong.steward.service.qiniu.QINiuFileService;
+import top.duanhong.steward.service.file.QiNiuFileService;
+import top.duanhong.steward.service.sys.impl.DictService;
+import top.duanhong.steward.service.sys.impl.MessageService;
+import top.duanhong.steward.service.tag.NetTabService;
 import top.duanhong.steward.utils.MethodExcuResult;
 
 import javax.annotation.Resource;
@@ -38,7 +41,7 @@ public class StewardApplicationTests {
     @Autowired FileService fileService;
 
     @Autowired
-    private QINiuFileService qiNiuFileService;
+    private QiNiuFileService qiNiuFileService;
 
     @Test
     public void contextLoads() {

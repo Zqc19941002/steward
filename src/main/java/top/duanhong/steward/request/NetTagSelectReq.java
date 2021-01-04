@@ -27,6 +27,8 @@ public class NetTagSelectReq {
 
     private String theme;
 
+    private String state;
+
     private int page;
 
     private int pageSize;
