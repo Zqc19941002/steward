@@ -1,7 +1,6 @@
 package top.duanhong.steward.service.file.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -29,9 +28,6 @@ public class QiNiuFileServiceImpl implements QiNiuFileService {
     @Autowired
     private RedisSequenceService redisSequenceService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @Resource
     private StewFileMapper stewFileMapper;
 
@@ -49,7 +45,8 @@ public class QiNiuFileServiceImpl implements QiNiuFileService {
                 String fileKey = redisSequenceService.generateWithPrefix(SequenceEnum.QI_NIU_FILE_SEQ);
                 Response response = uploadManager.put(file, fileKey, upToken);
                 //解析上传成功的结果
-                DefaultPutRet putRet = objectMapper.readValue(response.bodyString(), DefaultPutRet.class);
+                //DefaultPutRet putRet = objectMapper.readValue(response.bodyString(), DefaultPutRet.class);
+                DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
                 //System.out.println(putRet.key);
                 //System.out.println(putRet.hash);
 
@@ -62,16 +59,6 @@ public class QiNiuFileServiceImpl implements QiNiuFileService {
                 result.setSuccess(false);
                 result.setResultCode("8979");
                 result.setMessage("文件上传异常");
-                e.printStackTrace();
-            } catch (JsonMappingException e) {
-                result.setSuccess(false);
-                result.setResultCode("8797");
-                result.setMessage("上传结果集转换异常");
-                e.printStackTrace();
-            } catch (JsonProcessingException e) {
-                result.setSuccess(false);
-                result.setResultCode("8797");
-                result.setMessage("上传结果集转换异常");
                 e.printStackTrace();
             }
         }

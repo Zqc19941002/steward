@@ -2,8 +2,10 @@ package top.duanhong.steward.utils;
 
 import com.qiniu.util.Auth;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class QiNiuUtil {
 
     public static final String SECRET_KEY = "5DsX2S7MMFaDcoV27TwfPmB9Rh0Uo26utVzTeeg_";
