@@ -1,0 +1,36 @@
++------------------+---------------+------+-----+-------------------+-------+
+| Field            | Type          | Null | Key | Default           | Extra |
++------------------+---------------+------+-----+-------------------+-------+
+| employer_id      | int(11)       | NO   | PRI | NULL              |       |
+| register_type    | int(11)       | NO   |     | 1                 |       |
+| employer_type    | int(11)       | NO   |     | NULL              |       |
+| employer_name    | varchar(64)   | YES  |     | NULL              |       |
+| company_id       | int(11)       | NO   | MUL | NULL              |       |
+| dept_name        | varchar(100)  | YES  |     | NULL              |       |
+| belong_id        | int(11)       | YES  | MUL | NULL              |       |
+| username         | varchar(32)   | NO   |     | NULL              |       |
+| email            | varchar(64)   | YES  |     | NULL              |       |
+| phone            | varchar(20)   | YES  |     | NULL              |       |
+| external_id      | varchar(32)   | YES  |     | NULL              |       |
+| password         | varchar(128)  | NO   |     | NULL              |       |
+| state            | int(1)        | NO   |     | NULL              |       |
+| authorities      | varchar(256)  | YES  |     | NULL              |       |
+| features         | int(11)       | NO   |     | 0                 |       |
+| eff_date         | timestamp     | YES  |     | NULL              |       |
+| exp_date         | timestamp     | YES  |     | NULL              |       |
+| img_url          | varchar(512)  | YES  |     | NULL              |       |
+| short_desc       | varchar(128)  | YES  |     | NULL              |       |
+| long_desc        | varchar(1024) | YES  |     | NULL              |       |
+| create_date      | timestamp     | NO   |     | CURRENT_TIMESTAMP |       |
+| created_by       | int(11)       | NO   |     | 0                 |       |
+| client_ip        | varchar(256)  | YES  |     | NULL              |       |
+| os               | varchar(30)   | YES  |     | NULL              |       |
+| browser          | varchar(20)   | YES  |     | NULL              |       |
+| browser_version  | varchar(512)  | YES  |     | NULL              |       |
+| visit_track      | varchar(64)   | YES  |     | NULL              |       |
+| ip_region        | varchar(64)   | YES  |     | NULL              |       |
+| ip_city          | varchar(64)   | YES  |     | NULL              |       |
+| phone_region     | varchar(64)   | YES  |     | NULL              |       |
+| phone_city       | varchar(64)   | YES  |     | NULL              |       |
+| region_sync_flag | int(11)       | YES  |     | 0                 |       |
++------------------+---------------+------+-----+-------------------+-------+
