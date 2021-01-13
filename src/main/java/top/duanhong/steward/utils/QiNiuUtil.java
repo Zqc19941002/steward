@@ -11,7 +11,7 @@ public class QiNiuUtil {
     public static final String SECRET_KEY = "5DsX2S7MMFaDcoV27TwfPmB9Rh0Uo26utVzTeeg_";
     public static final String ACCESS_KEY = "wSev1gzynuXgxcEYMfGcsli2c4R9hKbErgs0s-7Z";
     public static final String QI_NIU_FILE_URL = "https://img.october2.top/";
-    public static final long EXPIRES = 3600;
+    public static final long EXPIRES = 10;
     public static final String BUCKET_NAME="duanhong-bucket";
     public static final Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 

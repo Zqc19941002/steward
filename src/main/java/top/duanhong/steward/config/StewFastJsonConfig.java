@@ -5,8 +5,10 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 
 /**
@@ -24,7 +26,7 @@ public class StewFastJsonConfig {
     FastJsonHttpMessageConverter fastJsonHttpMessageConverter(){
         FastJsonHttpMessageConverter fastJsonHttpMessageConverter=new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig=new FastJsonConfig();
-        fastJsonConfig.setDateFormat("yyyy-MM-dd HH-mm-ss");
+        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
         fastJsonConfig.setCharset(Charset.forName("UTF-8"));
         fastJsonConfig.setSerializerFeatures(
 //                SerializerFeature.WriteClassName,
@@ -35,6 +37,7 @@ public class StewFastJsonConfig {
 
         );
         fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
+        fastJsonHttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON,MediaType.APPLICATION_JSON_UTF8));
         return fastJsonHttpMessageConverter;
     }
 }

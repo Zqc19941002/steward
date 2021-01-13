@@ -43,6 +43,7 @@ public class StewardApplicationTests {
     @Autowired
     private QiNiuFileService qiNiuFileService;
 
+
     @Test
     public void contextLoads() {
     }

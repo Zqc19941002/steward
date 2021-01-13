@@ -350,11 +350,21 @@ public class DateUtil {
      * 获取未来两小时
      * @return
      */
-    public static Date getCurrentAfterTwoHours(){
+    public static long[] getCurrentAfterTwoHours(){
+        long[] timeMills=new long[2];
+        Calendar calendarCurr=Calendar.getInstance();
+        calendarCurr.set(Calendar.MINUTE,0);
+        calendarCurr.set(Calendar.SECOND,0);
+        calendarCurr.set(Calendar.MILLISECOND,0);
+        timeMills[0]=calendarCurr.getTime().getTime();
+
         Calendar calendar=Calendar.getInstance();
         calendar.add(Calendar.HOUR_OF_DAY,2);
-        Date date=calendar.getTime();
-        return date;
+        calendar.set(Calendar.MINUTE,0);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        timeMills[1]=calendar.getTime().getTime();
+        return timeMills;
     }
 
     public static void main(String[] args) {
