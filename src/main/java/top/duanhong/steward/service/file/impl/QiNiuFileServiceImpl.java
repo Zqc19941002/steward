@@ -32,7 +32,7 @@ public class QiNiuFileServiceImpl implements QiNiuFileService {
     private StewFileMapper stewFileMapper;
 
     @Override
-    public MethodExecuteResult uploadQiNiuFile(File file) {
+    public MethodExecuteResult<DefaultPutRet> uploadQiNiuFile(File file) {
         MethodExecuteResult result = new MethodExecuteResult(StatusCodeEnum.SUCCESS_CODE.getMessage(), true, StatusCodeEnum.SUCCESS_CODE.getCode());
         //构造一个带指定 Region 对象的配置类
         Configuration cfg = new Configuration(Region.region0());
@@ -45,15 +45,14 @@ public class QiNiuFileServiceImpl implements QiNiuFileService {
                 String fileKey = redisSequenceService.generateWithPrefix(SequenceEnum.QI_NIU_FILE_SEQ);
                 Response response = uploadManager.put(file, fileKey, upToken);
                 //解析上传成功的结果
-                //DefaultPutRet putRet = objectMapper.readValue(response.bodyString(), DefaultPutRet.class);
                 DefaultPutRet putRet = JSON.parseObject(response.bodyString(), DefaultPutRet.class);
                 //System.out.println(putRet.key);
                 //System.out.println(putRet.hash);
 
-                //保存文件属性（文件存在七牛云）
-                StewFile stewFile=new StewFile();
+                //保存文件（文件存在七牛云）
+                /*StewFile stewFile=new StewFile();
                 stewFile.setFileId(redisSequenceService.generateWithPrefix(SequenceEnum.STEW_FILE_SEQ));
-                stewFileMapper.insert(stewFile);
+                stewFileMapper.insert(stewFile);*/
                 result.setData(putRet);
             } catch (QiniuException e) {
                 result.setSuccess(false);

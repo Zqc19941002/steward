@@ -24,6 +24,7 @@ public class SequenceEnum implements Serializable {
     public static final String STEW_MENU_SEQ="STEW_MENU_SEQ";
     public static final String QI_NIU_FILE_SEQ="QI_NIU_FILE_SEQ";
     public static final String STEW_WORK_PLAN_SEQ="STEW_WORK_PLAN_SEQ";
+    public static final String STEW_CHAT_ROOM_SEQ="STEW_CHAT_ROOM_SEQ";
 
     /**
      * 序列前缀集合
@@ -44,6 +45,7 @@ public class SequenceEnum implements Serializable {
             put(STEW_MENU_SEQ,"menu_");
             put(QI_NIU_FILE_SEQ,"qiniu_file_");
             put(STEW_WORK_PLAN_SEQ,"plan_");
+            put(STEW_CHAT_ROOM_SEQ,"chat_room_");
         }
     };
 
@@ -66,6 +68,7 @@ public class SequenceEnum implements Serializable {
             put(STEW_MENU_SEQ,"10");
             put(QI_NIU_FILE_SEQ,"1000000");
             put(STEW_WORK_PLAN_SEQ,"1000000");
+            put(STEW_CHAT_ROOM_SEQ,"1000000");
         }
     };
 

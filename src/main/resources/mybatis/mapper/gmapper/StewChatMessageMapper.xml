@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.duanhong.steward.mapper.gmapper.StewChatMessageMapper">
+  <resultMap id="BaseResultMap" type="top.duanhong.steward.entity.po.StewChatMessage">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="sender_id" jdbcType="VARCHAR" property="senderId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="send_date" jdbcType="DATE" property="sendDate" />
+    <result column="send_timestamp" jdbcType="TIMESTAMP" property="sendTimestamp" />
+    <result column="msg_system" jdbcType="BIT" property="msgSystem" />
+    <result column="saved" jdbcType="BIT" property="saved" />
+    <result column="distributed" jdbcType="BIT" property="distributed" />
+    <result column="seen" jdbcType="BIT" property="seen" />
+    <result column="disable_actions" jdbcType="BIT" property="disableActions" />
+    <result column="disable_reactions" jdbcType="BIT" property="disableReactions" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, content, sender_id, user_name, send_date, send_timestamp, msg_system, saved, 
+    distributed, seen, disable_actions, disable_reactions
+  </sql>
+  <select id="selectByExample" parameterType="top.duanhong.steward.entity.po.StewChatMessageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from stew_chat_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="top.duanhong.steward.entity.po.StewChatMessageExample">
+    delete from stew_chat_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.duanhong.steward.entity.po.StewChatMessage">
+    insert into stew_chat_message (id, content, sender_id, 
+      user_name, send_date, send_timestamp, 
+      msg_system, saved, distributed, 
+      seen, disable_actions, disable_reactions
+      )
+    values (#{id,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{senderId,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{sendDate,jdbcType=DATE}, #{sendTimestamp,jdbcType=TIMESTAMP}, 
+      #{msgSystem,jdbcType=BIT}, #{saved,jdbcType=BIT}, #{distributed,jdbcType=BIT}, 
+      #{seen,jdbcType=BIT}, #{disableActions,jdbcType=BIT}, #{disableReactions,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.duanhong.steward.entity.po.StewChatMessage">
+    insert into stew_chat_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="senderId != null">
+        sender_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="sendDate != null">
+        send_date,
+      </if>
+      <if test="sendTimestamp != null">
+        send_timestamp,
+      </if>
+      <if test="msgSystem != null">
+        msg_system,
+      </if>
+      <if test="saved != null">
+        saved,
+      </if>
+      <if test="distributed != null">
+        distributed,
+      </if>
+      <if test="seen != null">
+        seen,
+      </if>
+      <if test="disableActions != null">
+        disable_actions,
+      </if>
+      <if test="disableReactions != null">
+        disable_reactions,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null">
+        #{senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDate != null">
+        #{sendDate,jdbcType=DATE},
+      </if>
+      <if test="sendTimestamp != null">
+        #{sendTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msgSystem != null">
+        #{msgSystem,jdbcType=BIT},
+      </if>
+      <if test="saved != null">
+        #{saved,jdbcType=BIT},
+      </if>
+      <if test="distributed != null">
+        #{distributed,jdbcType=BIT},
+      </if>
+      <if test="seen != null">
+        #{seen,jdbcType=BIT},
+      </if>
+      <if test="disableActions != null">
+        #{disableActions,jdbcType=BIT},
+      </if>
+      <if test="disableReactions != null">
+        #{disableReactions,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.duanhong.steward.entity.po.StewChatMessageExample" resultType="java.lang.Long">
+    select count(*) from stew_chat_message
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stew_chat_message
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderId != null">
+        sender_id = #{record.senderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendDate != null">
+        send_date = #{record.sendDate,jdbcType=DATE},
+      </if>
+      <if test="record.sendTimestamp != null">
+        send_timestamp = #{record.sendTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.msgSystem != null">
+        msg_system = #{record.msgSystem,jdbcType=BIT},
+      </if>
+      <if test="record.saved != null">
+        saved = #{record.saved,jdbcType=BIT},
+      </if>
+      <if test="record.distributed != null">
+        distributed = #{record.distributed,jdbcType=BIT},
+      </if>
+      <if test="record.seen != null">
+        seen = #{record.seen,jdbcType=BIT},
+      </if>
+      <if test="record.disableActions != null">
+        disable_actions = #{record.disableActions,jdbcType=BIT},
+      </if>
+      <if test="record.disableReactions != null">
+        disable_reactions = #{record.disableReactions,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stew_chat_message
+    set id = #{record.id,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      sender_id = #{record.senderId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      send_date = #{record.sendDate,jdbcType=DATE},
+      send_timestamp = #{record.sendTimestamp,jdbcType=TIMESTAMP},
+      msg_system = #{record.msgSystem,jdbcType=BIT},
+      saved = #{record.saved,jdbcType=BIT},
+      distributed = #{record.distributed,jdbcType=BIT},
+      seen = #{record.seen,jdbcType=BIT},
+      disable_actions = #{record.disableActions,jdbcType=BIT},
+      disable_reactions = #{record.disableReactions,jdbcType=BIT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
