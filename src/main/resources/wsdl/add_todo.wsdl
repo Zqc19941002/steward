@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://nm.cmcc/esb/services/BS_OA_WPG_UnityWaitTask" xmlns:soapenc12="http://www.w3.org/2003/05/soap-encoding" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://nm.cmcc/esb/services/BS_OA_WPG_UnityWaitTask" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap11="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc11="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <wsdl:types>
+    <xsd:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://nm.cmcc/esb/services/BS_OA_WPG_UnityWaitTask" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+ 
+<xsd:element name="receviceData">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="in0" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in1" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in2" nillable="true" type="xsd:int"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in3" nillable="true" type="xsd:string"/>
+<xsd:element maxOccurs="1" minOccurs="1" name="in4" nillable="true" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="receviceDataResponse">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="1" minOccurs="1" name="out" type="xsd:int"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="receviceDataResponse">
+    <wsdl:part name="parameters" element="tns:receviceDataResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="receviceDataRequest">
+    <wsdl:part name="parameters" element="tns:receviceData">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="BS_OA_WPG_UnityWaitTaskPortType">
+    <wsdl:operation name="receviceData">
+      <wsdl:input name="receviceDataRequest" message="tns:receviceDataRequest">
+    </wsdl:input>
+      <wsdl:output name="receviceDataResponse" message="tns:receviceDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BS_OA_WPG_UnityWaitTaskHttpBinding" type="tns:BS_OA_WPG_UnityWaitTaskPortType">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="receviceData">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="receviceDataRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="receviceDataResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BS_OA_WPG_UnityWaitTask">
+    <wsdl:port name="BS_OA_WPG_UnityWaitTaskHttpPort" binding="tns:BS_OA_WPG_UnityWaitTaskHttpBinding">
+      <wsdlsoap:address location="http://10.221.138.196:7879/ESB_UnityWaitTask_App/services/BS_OA_WPG_UnityWaitTask/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

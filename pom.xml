@@ -180,10 +180,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <!--zk依赖-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zookeeper-config</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- springboot 提供监听的 动态获取配置数据-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -239,6 +239,37 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- CXF webservice -->
+       <!-- <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+            <version>3.1.11</version>
+        </dependency>-->
+        <!-- CXF webservice -->
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-core</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
